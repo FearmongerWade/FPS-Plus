@@ -53,11 +53,9 @@ class FreeplayStateOld extends MusicBeatState
 		addWeek(['Cocoa', 'Eggnog', 'Winter-Horrorland'], 5, ['parents', 'parents', 'monster']);
 		addWeek(['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai-angry', 'spirit']);
 		addWeek(['Ugh', 'Guns', 'Stress'], 7, ['tankman']);
-		addWeek(['2Hot', 'joy'], 8, ['darnell']);
 
-		if(Config.ee2 && Startup.hasEe2){
+		if(Config.ee2 && Startup.hasEe2)
 			addWeek(['Lil-Buddies'], 1, ['face-lil']);
-		}
 		
 		// LOAD CHARACTERS
 
@@ -104,9 +102,8 @@ class FreeplayStateOld extends MusicBeatState
 		changeSelection(startingSelection);
 		changeDiff(0, false);
 
-		if(fromPlayStateFinishSong){
+		if(fromPlayStateFinishSong)
 			customTransIn = new StickerIn();
-		}
 
 		fromMainMenu = false;
 		fromPlayStateFinishSong = false;

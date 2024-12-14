@@ -531,7 +531,7 @@ class ResultsState extends FlxUIStateExt
 			case "freeplay":
                 customTransOut = new StickerOut();
 			    FreeplayState.playStickerIntro = true;
-				switchState(new FreeplayState(false));
+				switchState(new old.FreeplayStateOld());
                 FlxTween.tween(FlxG.sound.music, {pitch: 3}, 0.1, {onComplete: function(t){
                     FlxTween.tween(FlxG.sound.music, {pitch: 0.5}, 0.65);
                 }});
