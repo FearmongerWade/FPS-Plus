@@ -1,5 +1,15 @@
 package backend;
 
+/*
+	New settings/save variable system
+	It's based on Psych Engine
+	With a few things from Rudyrue's psych fork
+	Support Shadow and Rudy, not me
+
+	https://github.com/ShadowMario/FNF-PsychEngine/blob/main/source/backend/ClientPrefs.hx
+	https://github.com/Rudyrue/custom-psych/blob/main/src/backend/Settings.hx
+*/
+
 import flixel.util.FlxSave;
 
 @:structInit class SaveVariables
@@ -21,15 +31,12 @@ class Settings
 			Reflect.setField(FlxG.save.data, key, Reflect.field(data, key));
 
 		FlxG.save.flush();
-
-		var save:FlxSave = new FlxSave();
-		save.bind('settings', Utils.getSavePath());
-		save.flush();
-		FlxG.log.add("Settings saved!");
 	}
 
 	public static function load()
 	{
+		FlxG.save.bind('settings', Utils.getSavePath());
+
 		for (key in Reflect.fields(data))
 			if (Reflect.hasField(FlxG.save.data, key))
 				Reflect.setField(data, key, Reflect.field(FlxG.save.data, key));

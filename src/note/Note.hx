@@ -159,7 +159,7 @@ class Note extends FlxSprite
 
 			xOffset += width / 2;
 			
-			flipY = Config.downscroll;
+			flipY = Settings.data.downscroll;
 
 			switch (noteData)
 			{

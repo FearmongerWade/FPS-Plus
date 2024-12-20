@@ -12,7 +12,6 @@ import note.NoteType;
 
 class Startup extends FlxState
 {
-    public static var fpsCounter:FPSCounter;
     var nextState:FlxState = new TitleIntroText();
 
     var splash:FlxSprite;

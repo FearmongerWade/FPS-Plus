@@ -468,7 +468,7 @@ class ConfigMenu extends FlxUIStateExt
 		healthValue = Std.int(Config.healthMultiplier * 10);
 		healthDrainValue = Std.int(Config.healthDrainMultiplier * 10);
 		comboValue = Config.comboType;
-		downValue = Config.downscroll;
+		downValue = Settings.data.downscroll;
 		glowValue = Config.noteGlow;
 		randomTapValue = Config.ghostTapType;
 		dimValue = Config.bgDim;

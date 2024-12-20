@@ -539,7 +539,7 @@ class PlayState extends MusicBeatState
 			comboUI.velocityScale = 0.3;
 			comboUI.limitSprites = true;
 
-			if(!Config.downscroll){
+			if(!Settings.data.downscroll){
 				comboUI.ratingInfo.position.set(844, 580);
 				comboUI.numberInfo.position.set(340, 505);
 				comboUI.comboBreakInfo.position.set(844, 580);
@@ -568,7 +568,7 @@ class PlayState extends MusicBeatState
 
 		Conductor.songPosition = -5000;
 
-		if(Config.downscroll){
+		if(Settings.data.downscroll){
 			strumLine = new FlxSprite(0, 570).makeGraphic(FlxG.width, 10);
 		}
 		else {
@@ -618,7 +618,7 @@ class PlayState extends MusicBeatState
 			add(meta);
 		}
 
-		healthBarBG = new FlxSprite(0, Config.downscroll ? FlxG.height * 0.1 : FlxG.height * 0.875).loadGraphic(Paths.image("ui/healthBar"));
+		healthBarBG = new FlxSprite(0, Settings.data.downscroll ? FlxG.height * 0.1 : FlxG.height * 0.875).loadGraphic(Paths.image("ui/healthBar"));
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
 		healthBarBG.antialiasing = true;
@@ -641,7 +641,7 @@ class PlayState extends MusicBeatState
 		iconP2 = new HealthIcon(dad.iconName, false);
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 
-		ccText = new SongCaptions(Config.downscroll);
+		ccText = new SongCaptions(Settings.data.downscroll);
 		ccText.scrollFactor.set();
 		
 		add(healthBar);
@@ -1479,7 +1479,7 @@ class PlayState extends MusicBeatState
 				scrollSpeed = FlxMath.roundDecimal(PlayState.SONG.speed, 2);
 			}
 
-			if(Config.downscroll){
+			if(Settings.data.downscroll){
 				daNote.y = (strumLine.y + (Conductor.songPosition - daNote.strumTime) * (0.45 * scrollSpeed)) - daNote.yOffset;	
 				if(daNote.isSustainNote){
 					daNote.y -= daNote.height;
@@ -1521,7 +1521,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-			if (Config.downscroll ? (daNote.y > strumLine.y + daNote.height + 50) : (daNote.y < strumLine.y - daNote.height - 50)){
+			if (Settings.data.downscroll ? (daNote.y > strumLine.y + daNote.height + 50) : (daNote.y < strumLine.y - daNote.height - 50)){
 				if (daNote.tooLate || daNote.wasGoodHit){
 								
 					daNote.active = false;
