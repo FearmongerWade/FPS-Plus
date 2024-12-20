@@ -51,10 +51,6 @@ class TitleScreen extends MusicBeatState
 	{
 		//Polymod.init({modRoot: "mods", dirs: ['introMod']});
 
-		// DEBUG BULLSHIT
-
-		Config.setFramerate(144);
-
 		useDefaultTransIn = false;
 
 		camBackground = new FlxCamera();

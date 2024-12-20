@@ -40,9 +40,6 @@ class FreeplayStateOld extends MusicBeatState
 
 	override function create()
 	{
-
-		Config.setFramerate(144);
-		
 		curSelected = 0;
 
 		addWeek(['Tutorial'], 1, ['gf-menu']);

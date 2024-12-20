@@ -59,8 +59,6 @@ class AnimationDebug extends FlxState
 	override function create()
 	{
 
-		Config.setFramerate(144);
-
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;

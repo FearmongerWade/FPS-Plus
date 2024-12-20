@@ -34,8 +34,6 @@ class PauseSubState extends MusicBeatSubstate
 
 		super();
 
-		Config.setFramerate(144);
-
 		PlayState.instance.tweenManager.active = false;
 
 		camPause = new FlxCamera();
@@ -209,7 +207,6 @@ class PauseSubState extends MusicBeatSubstate
 	}
 
 	function unpause(){
-		Config.setFramerate(999);
 		FlxG.cameras.remove(camPause, true);
 		close();
 	}

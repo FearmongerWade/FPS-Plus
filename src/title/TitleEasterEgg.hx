@@ -27,8 +27,6 @@ class TitleEasterEgg extends MusicBeatState
 
         customTransIn = new InstantTransition();
 
-        Config.setFramerate(144);
-
         FlxG.sound.playMusic(Paths.music("1326148"), 1, false);
         FlxG.sound.music.onComplete = exit;
         Conductor.changeBPM(183.48);

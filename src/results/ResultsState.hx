@@ -127,8 +127,6 @@ class ResultsState extends FlxUIStateExt
 
     override function create() {
 
-        Config.setFramerate(144);
-
 		persistentUpdate = persistentDraw = true;
 
         camBg = new FlxCamera();

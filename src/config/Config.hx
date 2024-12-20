@@ -187,20 +187,5 @@ class Config
 			FlxG.save.data.showMisses = 1;
 		if(FlxG.save.data.pauseMusicBehavior == null)
 			FlxG.save.data.pauseMusicBehavior = 0;
-		
-
-		if(FlxG.save.data.ee1 == null)
-			FlxG.save.data.ee1 = false;
-		if(FlxG.save.data.ee2 == null)
-			FlxG.save.data.ee2 = false;
 	}
-
-	public static function setFramerate(cap:Int, ?useValueInsteadOfSave:Int = -1){
-		var fps:Int = framerate;
-		if(useValueInsteadOfSave > -1){ fps = useValueInsteadOfSave; }
-		if(fps > cap) { fps = cap; }
-		FlxG.updateFramerate = fps;
-		FlxG.drawFramerate  = fps;
-	}
-	
 }

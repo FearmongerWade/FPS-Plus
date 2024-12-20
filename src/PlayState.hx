@@ -302,8 +302,6 @@ class PlayState extends MusicBeatState
 			FlxG.sound.cache(Paths.sound("missnote" + i));
 		}
 		
-		Config.setFramerate(999);
-
 		camTween = tweenManager.tween(this, {}, 0);
 		camZoomTween = tweenManager.tween(this, {}, 0);
 		uiZoomTween = tweenManager.tween(this, {}, 0);

@@ -40,6 +40,13 @@ class Settings
 		for (key in Reflect.fields(data))
 			if (Reflect.hasField(FlxG.save.data, key))
 				Reflect.setField(data, key, Reflect.field(FlxG.save.data, key));
+
+		if (FlxG.save.data.framerate == null) 
+		{
+			var refreshRate:Int = FlxG.stage.application.window.displayMode.refreshRate;
+			data.framerate = Std.int(FlxMath.bound(refreshRate * 2, 60, 360));
+		}
+			
 	}
 
 	public static inline function reset()

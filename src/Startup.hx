@@ -80,6 +80,8 @@ class Startup extends FlxState
 
         FlxG.mouse.visible = false;
         FlxG.sound.muteKeys = null;
+        FlxG.game.focusLostFramerate = 15;
+        FlxG.drawFramerate = FlxG.updateFramerate = Settings.data.framerate;
 
         //FlxG.save.bind("data", "Rozebud/FunkinFPSPlus");
 		Highscore.load();

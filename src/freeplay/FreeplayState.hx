@@ -119,9 +119,7 @@ class FreeplayState extends MusicBeatState
 	}
 
 	override function create(){
-
-		Config.setFramerate(144);
-
+		
 		persistentUpdate = persistentDraw = true;
 
 		nextAfkTime = FlxG.random.float(minAfkTime, maxAfkTime);

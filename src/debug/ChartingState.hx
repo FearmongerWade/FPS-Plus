@@ -155,9 +155,6 @@ class ChartingState extends MusicBeatState
 
 	override function create()
 	{
-
-		Config.setFramerate(120);
-
 		PlayState.fromChartEditor = true;
 		SaveManager.global();
 		ee2Check = Config.ee2;

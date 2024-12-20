@@ -109,8 +109,6 @@ class ConfigMenu extends FlxUIStateExt
 
 	override function create(){
 
-		Config.setFramerate(fpsCapInSettings);
-
         if(exitTo == null){
 			exitTo = MainMenuState;
 		}
@@ -509,8 +507,6 @@ class ConfigMenu extends FlxUIStateExt
             if(framerateValue >= allowedFramerates.length){
                 framerateValue = 0;
             }
-
-            Config.setFramerate(fpsCapInSettings, allowedFramerates[framerateValue]);
 
             fpsCap.setting = ": " + (allowedFramerates[framerateValue] == 999 ? "uncapped" : ""+allowedFramerates[framerateValue]);
             #end

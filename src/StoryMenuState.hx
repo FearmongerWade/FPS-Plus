@@ -114,9 +114,6 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
-
-		Config.setFramerate(144);
-	
 		if (FlxG.sound.music == null || !FlxG.sound.music.playing){
 			FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), TitleScreen.titleMusicVolume);
 		}
