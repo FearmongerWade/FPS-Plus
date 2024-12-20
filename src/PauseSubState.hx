@@ -54,28 +54,7 @@ class PauseSubState extends MusicBeatSubstate
 		}
 
 		var pauseSongName = "pause/breakfast";
-
-		if(Config.pauseMusicBehavior < 2){ //Only if breakfast only is off
-			switch(PlayState.SONG.song.toLowerCase()){
-				case "spookeez" | "south" | "monster" | "winter-horrorland" | "spookeez-erect" | "south-erect":
-					if(Config.pauseMusicBehavior == 0) { pauseSongName = "pause/911825_woah_Loop"; }
-				case "pico" | "philly" | "blammed" | "pico-erect" | "philly-erect" | "blammed-erect":
-					if(Config.pauseMusicBehavior == 0) { pauseSongName = "pause/947670_hacker.07_Loop"; }
-				case "satin-panties" | "high" | "milf" | "satin-panties-erect" | "high-erect":
-					if(Config.pauseMusicBehavior == 0) { pauseSongName = "pause/1317505_RUN1N_Loop"; }
-				case "cocoa" | "eggnog" | "eggnog-erect":
-					if(Config.pauseMusicBehavior == 0) { pauseSongName = "pause/918379_Love-Emoji_Loop"; }
-				case "senpai" | "roses" | "thorns" | "senpai-erect" | "roses-erect" | "thorns-erect":
-					pauseSongName = "pause/breakfast-pixel";
-				case "ugh" | "guns" | "stress":
-					if(Config.pauseMusicBehavior == 0) { pauseSongName = "week7/distorto"; }
-				case "darnell" | "lit-up" | "2hot" | "blazin":
-					pauseSongName = "pause/breakfast-pico";
-				case "lil-buddies" | "lil-buddies-erect":
-					if(Config.pauseMusicBehavior == 0) { pauseSongName = "pause/1100059_skippingrecord_Loop"; }
-			}
-		}
-
+		
 		pauseMusic = new FlxSound().loadEmbedded(Paths.music(pauseSongName), true, true);
 		
 		pauseMusic.volume = 0;

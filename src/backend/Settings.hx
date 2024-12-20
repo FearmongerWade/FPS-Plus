@@ -14,11 +14,17 @@ import flixel.util.FlxSave;
 
 @:structInit class SaveVariables
 {
+	// -- Gameplay -- // 
+	
 	public var downscroll:Bool = false;
+	public var ghostTapping:Bool = true;
+	public var offset:Int = 0;
+	public var framerate:Int = 144;
+
+	// -- Customization -- //
+
 	public var shaders:Bool = true;
 	public var flashing:Bool = true;
-	public var framerate:Int = 144;
-	public var offset:Int = 0;
 }
 class Settings
 {

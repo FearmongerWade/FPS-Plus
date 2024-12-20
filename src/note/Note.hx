@@ -65,7 +65,7 @@ class Note extends FlxSprite
 		editor = _editor;
 		
 		if(!editor){
-			strumTime = _strumTime + Config.offset;
+			strumTime = _strumTime + Settings.data.offset;
 			if(strumTime < 0) {
 				strumTime = 0;
 			}
@@ -201,10 +201,6 @@ class Note extends FlxSprite
 				
 				var speed = PlayState.SONG.speed;
 
-				if(Config.scrollSpeedOverride > 0){
-					speed = Config.scrollSpeedOverride;
-				}
-
 				var mult:Float = 1;
 				if(prevNote.isFake){ mult = 0.5; }
 
@@ -234,7 +230,7 @@ class Note extends FlxSprite
 			if (mustPress){
 				if(isSustainNote){
 					canBeHit = (strumTime < Conductor.songPosition + Conductor.badZone && (prevNote == null ? true : prevNote.wasGoodHit));
-					if(wasGoodHit && isSustainEnd && (Config.noteSplashType == 1 || Config.noteSplashType == 4)){
+					if(wasGoodHit && isSustainEnd/* && (Config.noteSplashType == 1 || Config.noteSplashType == 4)*/){
 						visible = false;
 						if(prevNote != null && prevNote.isSustainNote){
 							prevNote.visible = false;
@@ -257,7 +253,7 @@ class Note extends FlxSprite
 
 			//Glow note stuff.
 
-			if(Config.noteGlow){
+			/*if(Config.noteGlow){
 				if (canBeHit && !isSustainNote && animation.curAnim.name.contains("Scroll")){
 					glow();
 				}
@@ -265,7 +261,7 @@ class Note extends FlxSprite
 				if (tooLate && !isSustainNote && !animation.curAnim.name.contains("Scroll")){
 					idle();
 				}
-			}
+			}*/
 		}
 
 	}

@@ -87,8 +87,6 @@ class Startup extends FlxState
 		Highscore.load();
 
         Settings.load();
-		Config.configCheck();
-		Config.reload();
 
         Binds.init();
 

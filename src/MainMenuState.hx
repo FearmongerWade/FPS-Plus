@@ -125,9 +125,6 @@ class MainMenuState extends MusicBeatState
 		instantCamFollow = true;
 
 		changeItem();
-		
-		//Offset Stuff
-		Config.reload();
 
 		super.create();
 	}

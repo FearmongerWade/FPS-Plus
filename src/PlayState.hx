@@ -165,9 +165,6 @@ class PlayState extends MusicBeatState
 	public var playerStrums:FlxTypedGroup<FlxSprite>;
 	public var enemyStrums:FlxTypedGroup<FlxSprite>;
 
-	private var playerCovers:FlxTypedGroup<NoteHoldCover>;
-	private var enemyCovers:FlxTypedGroup<NoteHoldCover>;
-
 	private var curSong:String = "";
 
 	public var health:Float = 1;
@@ -310,7 +307,8 @@ class PlayState extends MusicBeatState
 		shakeReturnTween = tweenManager.tween(this, {}, 0);
 		camZoomAdjustTween = tweenManager.tween(this, {}, 0);
 		
-		canHit = !(Config.ghostTapType > 0);
+		canHit = !Settings.data.ghostTapping;
+		//canHit = !(Config.ghostTapType > 0);
 
 		camGame = new FlxCamera();
 
@@ -528,41 +526,7 @@ class PlayState extends MusicBeatState
 		//Prevents the game from lagging at first note splash.
 		var preloadSplash = new NoteSplash(-2000, -2000, 0);
 
-		if(Config.comboType == 1){
-
-			comboUI.cameras = [camHUD];
-			comboUI.setPosition(0, 0);
-			comboUI.scrollFactor.set(0, 0);
-			comboUI.accelScale = 0.3;
-			comboUI.velocityScale = 0.3;
-			comboUI.limitSprites = true;
-
-			if(!Settings.data.downscroll){
-				comboUI.ratingInfo.position.set(844, 580);
-				comboUI.numberInfo.position.set(340, 505);
-				comboUI.comboBreakInfo.position.set(844, 580);
-			}
-			else{
-				comboUI.ratingInfo.position.set(844, 150);
-				comboUI.numberInfo.position.set(340, 125);
-				comboUI.comboBreakInfo.position.set(844, 150);
-			}
-
-			switch(curUiType){
-				case "pixel":
-					comboUI.ratingInfo.scale *= 0.9;
-					comboUI.comboBreakInfo.scale *= 0.9;
-					
-				default:
-					comboUI.ratingInfo.scale *= 0.8;
-					comboUI.comboBreakInfo.scale *= 0.8;
-			}
-
-		}
-
-		if(Config.comboType < 2){
-			add(comboUI);
-		}
+		add(comboUI);
 
 		Conductor.songPosition = -5000;
 
@@ -579,13 +543,7 @@ class PlayState extends MusicBeatState
 		add(playerStrums);
 		add(enemyStrums);
 
-		playerCovers = new FlxTypedGroup<NoteHoldCover>();
-		enemyCovers = new FlxTypedGroup<NoteHoldCover>();
-
 		generateSong(SONG.song);
-
-		add(playerCovers);
-		add(enemyCovers);
 
 		camFollow = new FlxPoint();
 		camFollowOffset = new FlxPoint();
@@ -646,12 +604,9 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 		add(iconP1);
 		add(scoreTxt);
-		if(Config.showCaptions){ add(ccText); } 
 
 		playerStrums.cameras = [camHUD];
 		enemyStrums.cameras = [camHUD];
-		playerCovers.cameras = [camHUD];
-		enemyCovers.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
@@ -700,13 +655,6 @@ class PlayState extends MusicBeatState
 			//trace(endCutscene);
 			//trace(endCutsceneStoryOnly);
 		}
-
-		var bgDim = new FlxSprite(1280 / -2, 720 / -2).makeGraphic(1, 1, FlxColor.BLACK);
-		bgDim.scale.set(1280*2, 720*2);
-		bgDim.updateHitbox();
-		bgDim.cameras = [camOverlay];
-		bgDim.alpha = Config.bgDim/10;
-		add(bgDim);
 
 		cutsceneCheck();
 
@@ -1034,8 +982,6 @@ class PlayState extends MusicBeatState
 
 			switch (curUiType) {
 				case "pixel":
-					NoteHoldCover.coverPath = "week6/weeb/pixelUI/noteHoldCovers-pixel";
-
 					babyArrow.loadGraphic(Paths.image('week6/weeb/pixelUI/arrows-pixels'), true, 19, 19);
 					babyArrow.animation.add('green', [6]);
 					babyArrow.animation.add('red', [7]);
@@ -1071,8 +1017,6 @@ class PlayState extends MusicBeatState
 					}
 
 				default:
-					NoteHoldCover.coverPath = "ui/noteHoldCovers";
-
 					babyArrow.frames = Paths.getSparrowAtlas('ui/NOTE_assets');
 					babyArrow.animation.addByPrefix('green', 'arrowUP');
 					babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
@@ -1107,8 +1051,6 @@ class PlayState extends MusicBeatState
 					}
 			}
 
-			var noteCover:NoteHoldCover = new NoteHoldCover(babyArrow, i);
-
 			babyArrow.updateHitbox();
 			babyArrow.scrollFactor.set();
 
@@ -1127,14 +1069,10 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				if(!Config.centeredNotes && !forceCenteredNotes){
+				if(!forceCenteredNotes)
 					babyArrow.x += ((FlxG.width / 2));
-				}
-				else{
+				else
 					babyArrow.x += ((FlxG.width / 4));
-				}
-
-				playerCovers.add(noteCover);
 
 			}
 			else {
@@ -1146,11 +1084,9 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				if(Config.centeredNotes || forceCenteredNotes){
+				if(forceCenteredNotes){
 					babyArrow.x -= 1280;
 				}
-
-				enemyCovers.add(noteCover);
 			}
 
 			if(!instant){
@@ -1470,12 +1406,7 @@ class PlayState extends MusicBeatState
 				targetX = enemyStrums.members[Math.floor(Math.abs(daNote.noteData))].x;
 			}
 
-			if(Config.scrollSpeedOverride > 0){
-				scrollSpeed = Config.scrollSpeedOverride;
-			}
-			else{
-				scrollSpeed = FlxMath.roundDecimal(PlayState.SONG.speed, 2);
-			}
+			scrollSpeed = FlxMath.roundDecimal(PlayState.SONG.speed, 2);
 
 			if(Settings.data.downscroll){
 				daNote.y = (strumLine.y + (Conductor.songPosition - daNote.strumTime) * (0.45 * scrollSpeed)) - daNote.yOffset;	
@@ -1570,22 +1501,6 @@ class PlayState extends MusicBeatState
 
 				if(!daNote.isSustainNote){
 					daNote.destroy();
-				}
-				else{
-					if(daNote.prevNote == null || !daNote.prevNote.isSustainNote){
-						enemyCovers.forEach(function(cover:NoteHoldCover) {
-							if (Math.abs(daNote.noteData) == cover.noteDirection) {
-								cover.start();
-							}
-						});
-					}
-					else if(daNote.isSustainEnd){
-						enemyCovers.forEach(function(cover:NoteHoldCover) {
-							if (Math.abs(daNote.noteData) == cover.noteDirection) {
-								cover.end(false);
-							}
-						});
-					}
 				}
 
 			}
@@ -1736,20 +1651,18 @@ class PlayState extends MusicBeatState
 
 		switch(rating){
 			case "sick":
-				health += Scoring.SICK_HEAL_AMMOUNT * Config.healthMultiplier;
+				health += Scoring.SICK_HEAL_AMMOUNT;
 				songStats.sickCount++;
-				if(Config.noteSplashType >= 1 && Config.noteSplashType < 4){
-					createNoteSplash(note.noteData);
-				}
+				createNoteSplash(note.noteData);
 			case "good":
-				health += Scoring.GOOD_HEAL_AMMOUNT * Config.healthMultiplier;
+				health += Scoring.GOOD_HEAL_AMMOUNT;
 				songStats.goodCount++;
 			case "bad":
-				health += Scoring.BAD_HEAL_AMMOUNT * Config.healthMultiplier;
+				health += Scoring.BAD_HEAL_AMMOUNT;
 				songStats.badCount++;
 				comboBreak();
 			case "shit":
-				health += Scoring.SHIT_HEAL_AMMOUNT * Config.healthMultiplier;
+				health += Scoring.SHIT_HEAL_AMMOUNT;
 				songStats.shitCount++;
 				comboBreak();
 		}
@@ -1837,9 +1750,8 @@ class PlayState extends MusicBeatState
 
 					ignoreList.push(daNote.noteData);
 
-					if(Config.ghostTapType == 1){
-						setCanMiss();
-					}
+					//if(Settings.data.ghostTapping)
+					//	setCanMiss();
 				}
 
 			});
@@ -1911,12 +1823,6 @@ class PlayState extends MusicBeatState
 						daNote.destroy();
 						boyfriend.holdTimer = 0;
 						//updateAccuracyOld();
-
-						playerCovers.forEach(function(cover:NoteHoldCover) {
-							if (Math.abs(daNote.noteData) == cover.noteDirection) {
-								cover.end(false);
-							}
-						});
 
 						var recursiveNote = daNote;
 						while(recursiveNote.prevNote != null && recursiveNote.prevNote.exists && recursiveNote.prevNote.isSustainNote){
@@ -2061,7 +1967,7 @@ class PlayState extends MusicBeatState
 
 		if (!startingSong){
 
-			health -= healthLoss * Config.healthDrainMultiplier;
+			health -= healthLoss;
 
 			if(dropCombo){
 				comboBreak();
@@ -2092,7 +1998,7 @@ class PlayState extends MusicBeatState
 	}
 
 	function badNoteCheck(direction:Int = -1){
-		if((Config.ghostTapType == 0 || canHit) && !invuln){
+		if((!Settings.data.ghostTapping || canHit) && !invuln){
 			if (leftPress && (direction == -1 || direction == 0))
 				noteMissWrongPress(0);
 			else if (upPress && (direction == -1 || direction == 2))
@@ -2124,13 +2030,6 @@ class PlayState extends MusicBeatState
 
 			if(note.isFake){
 				note.wasGoodHit = true;
-				if(note.prevNote == null || !note.prevNote.isSustainNote){
-					playerCovers.forEach(function(cover:NoteHoldCover) {
-						if (Math.abs(note.noteData) == cover.noteDirection) {
-							cover.start();
-						}
-					});
-				}
 				return;
 			}
 
@@ -2140,7 +2039,7 @@ class PlayState extends MusicBeatState
 				if(combo > songStats.highestCombo) { songStats.highestCombo = combo; }
 			}
 			else{
-				health += Scoring.HOLD_HEAL_AMMOUNT * Config.healthMultiplier;
+				health += Scoring.HOLD_HEAL_AMMOUNT;
 				songStats.score += Std.int(Scoring.HOLD_SCORE_PER_SECOND * (Conductor.stepCrochet/1000));
 				songStats.susCount++;
 			}
@@ -2160,22 +2059,6 @@ class PlayState extends MusicBeatState
 
 			if(!note.isSustainNote){
 				note.destroy();
-			}
-			else{
-				if(note.prevNote == null || !note.prevNote.isSustainNote){
-					playerCovers.forEach(function(cover:NoteHoldCover) {
-						if (Math.abs(note.noteData) == cover.noteDirection) {
-							cover.start();
-						}
-					});
-				}
-				else if(note.isSustainEnd){
-					playerCovers.forEach(function(cover:NoteHoldCover) {
-						if (Math.abs(note.noteData) == cover.noteDirection) {
-							cover.end(true);
-						}
-					});
-				}
 			}
 		}
 	}
@@ -2494,11 +2377,8 @@ class PlayState extends MusicBeatState
 
 	public function uiBop(?_camZoom:Float = 0.01, ?_uiZoom:Float = 0.02, ?_time:Float = 0.6, ?_ease:Null<flixel.tweens.EaseFunction>){
 
-		if(Config.camBopAmount == 2){ return; }
-		else if(Config.camBopAmount == 1){
-			_camZoom /= 2;
-			_uiZoom /= 2;
-		}
+		_camZoom /= 2;
+		_uiZoom /= 2;
 
 		if(_ease == null){
 			_ease = FlxEase.quintOut;
@@ -2521,7 +2401,7 @@ class PlayState extends MusicBeatState
 	public function changeCamOffset(_x:Float, _y:Float, ?_time:Float = 1.4, ?_ease:Null<flixel.tweens.EaseFunction>){
 
 		//Don't allow for extra camera offsets if it's disabled in the config.
-		if(!Config.extraCamMovement){ return; }
+		//if(!Config.extraCamMovement){ return; }
 
 		if(_ease == null){
 			_ease = FlxEase.expoOut;
@@ -2575,21 +2455,11 @@ class PlayState extends MusicBeatState
 		endCamShake(_returnTime, _ease, _time);
 	}
 
-	function updateScoreText(){
-
-		scoreTxt.text = "Score:" + songStats.score;
-
-		if(Config.showMisses == 1){
-			scoreTxt.text += " | Misses:" + songStats.missCount;
-		}
-		else if(Config.showMisses == 2){
-			scoreTxt.text += " | Combo Breaks:" + songStats.comboBreakCount;
-		}
-
-		if(Config.showAccuracy){
-			scoreTxt.text += " | Accuracy:" + truncateFloat(songStats.accuracy, 2) + "%";
-		}
-
+	function updateScoreText()
+	{
+		scoreTxt.text = "Score:" + songStats.score + 
+		" | Misses:" + songStats.missCount +
+		" | Accuracy:" + truncateFloat(songStats.accuracy, 2) + "%";
 	}
 
 	function comboBreak():Void{
