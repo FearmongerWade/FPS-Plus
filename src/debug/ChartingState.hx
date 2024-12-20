@@ -1286,7 +1286,7 @@ class ChartingState extends MusicBeatState
 
 		justChanged = false;
 
-		if(Startup.hasEe2 && FlxG.keys.justPressed.B && FlxG.keys.pressed.SHIFT){
+		if(FlxG.keys.justPressed.B && FlxG.keys.pressed.SHIFT){
 			ee2Check = false;
 			//FlxG.save.bind("data", "Rozebud/FPSPlus");
 			SaveManager.global();
@@ -1296,61 +1296,6 @@ class ChartingState extends MusicBeatState
 			//FlxG.save.flush();
 			//FlxG.save.bind(_song.song.replace(" ", "-"), "Rozebud/FPSPlus/Chart-Editor-Autosaves");
 			SaveManager.chartAutosave(_song.song.replace(" ", "-"));
-		}
-
-		if(Startup.hasEe2 && lilBuddiesBox.checked){
-			if(!ee2Check && 
-				!FlxG.sound.music.playing &&
-				FlxG.mouse.screenX >= lilBf.x &&
-				FlxG.mouse.screenX <= lilBf.x + lilBf.width &&
-				FlxG.mouse.screenY >= lilBf.y &&
-				FlxG.mouse.screenY <= lilBf.y + lilBf.height &&
-				FlxG.mouse.justPressed){
-	
-					autosaveSong();
-
-					//FlxG.save.bind("data", "Rozebud/FPSPlus");
-					SaveManager.global();
-					FlxG.save.data.ee2 = true;
-					//FlxG.save.flush();
-					SaveManager.flush();
-					Config.reload();
-	
-					PlayState.fceForLilBuddies = true;
-					screenshotBitmap = FlxScreenGrab.grab(null, false, true);
-	
-					customTransOut = new InstantTransition();
-	
-					var poop:String = Highscore.formatSong("lil-buddies", 2);
-					PlayState.SONG = Song.loadFromJson(poop, "lil-buddies");
-					PlayState.isStoryMode = false;
-					PlayState.storyDifficulty = 2;
-					PlayState.loadEvents = true;
-					PlayState.returnLocation = "freeplay";
-					PlayState.storyWeek = 0;
-					trace('CUR WEEK' + PlayState.storyWeek);
-					switchState(new PlayState());
-	
-					//lilBf.animation.play("yeah");
-			}
-			else if(!FlxG.sound.music.playing &&
-				FlxG.mouse.screenX >= lilBf.x &&
-				FlxG.mouse.screenX <= lilBf.x + lilBf.width &&
-				FlxG.mouse.screenY >= lilBf.y &&
-				FlxG.mouse.screenY <= lilBf.y + lilBf.height &&
-				FlxG.mouse.justPressed){
-					lilBf.animation.play("yeah");
-			}
-		}
-		else if(lilBuddiesBox.checked){
-			if(!FlxG.sound.music.playing &&
-				FlxG.mouse.screenX >= lilBf.x &&
-				FlxG.mouse.screenX <= lilBf.x + lilBf.width &&
-				FlxG.mouse.screenY >= lilBf.y &&
-				FlxG.mouse.screenY <= lilBf.y + lilBf.height &&
-				FlxG.mouse.justPressed){
-					lilBf.animation.play("yeah");
-			}
 		}
 
 		super.update(elapsed);

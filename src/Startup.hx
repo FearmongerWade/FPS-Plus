@@ -85,6 +85,7 @@ class Startup extends FlxState
         //FlxG.save.bind("data", "Rozebud/FunkinFPSPlus");
 		Highscore.load();
 
+        Settings.load();
 		Config.configCheck();
 		Config.reload();
 
