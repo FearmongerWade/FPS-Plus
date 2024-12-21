@@ -43,9 +43,9 @@ class CacheReload extends FlxState
 
 	override function create()
 	{
-        songsCached = !CacheConfig.music;
-        charactersCached = !CacheConfig.characters;
-        graphicsCached = !CacheConfig.graphics;
+        songsCached = !Settings.data.cacheMusic;
+        charactersCached = !Settings.data.cacheCharacters;
+        graphicsCached = !Settings.data.cacheGraphics;
 
         if(doGraphics){
             GPUBitmap.disposeAll();

@@ -166,7 +166,7 @@ class MainMenuState extends MusicBeatState
 					
 					switch (daChoice){
 						case 'freeplay':
-							if(CacheConfig.music){
+							if(Settings.data.cacheMusic){
 								FlxG.sound.music.stop();
 							}
 						case 'options':

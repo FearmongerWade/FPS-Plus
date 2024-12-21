@@ -176,7 +176,7 @@ class FreeplayStateOld extends MusicBeatState
 			
 
 		if (Binds.justPressed("menuBack") && !FlxUIStateExt.inTransition){
-			if(CacheConfig.music){ FlxG.sound.music.stop(); }
+			if(Settings.data.cacheMusic){ FlxG.sound.music.stop(); }
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			switchState(new MainMenuState());
 		}
@@ -246,7 +246,7 @@ class FreeplayStateOld extends MusicBeatState
 		// lerpScore = 0;
 		#end
 
-		if(CacheConfig.music){
+		if(Settings.data.cacheMusic){
 			FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 0);
 			FlxG.sound.music.fadeIn(1, 0, 1);
 		}

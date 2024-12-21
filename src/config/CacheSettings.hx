@@ -100,15 +100,8 @@ class CacheSettings extends FlxUIStateExt
 		backText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         add(backText);
 
-        if(!CacheConfig.check())
-        {
-            CacheConfig.music = false;
-            CacheConfig.characters = true;
-            CacheConfig.graphics = false;
-        }
-
-        settings = [CacheConfig.music, CacheConfig.characters, CacheConfig.graphics];
-        startingSettings = [CacheConfig.music, CacheConfig.characters, CacheConfig.graphics];
+        settings = [Settings.data.cacheMusic, Settings.data.cacheCharacters, Settings.data.cacheGraphics];
+        startingSettings = [Settings.data.cacheMusic, Settings.data.cacheCharacters, Settings.data.cacheGraphics];
 
         textUpdate();
 
@@ -184,11 +177,13 @@ class CacheSettings extends FlxUIStateExt
 
     function save(){
 
-        CacheConfig.music = settings[0];
-        CacheConfig.characters = settings[1];
-        CacheConfig.graphics = settings[2];
+        Settings.data.cacheMusic = settings[0];
+        Settings.data.cacheCharacters = settings[1];
+        Settings.data.cacheGraphics = settings[2];
 
-        FlxG.save.flush();
+        Settings.data.firstRun = false;
+
+        Settings.save();
 
         //PlayerSettings.player1.controls.loadKeyBinds();
 

@@ -2510,7 +2510,7 @@ class PlayState extends MusicBeatState
 			Assets.cache.removeSound(Paths.voices(SONG.song));
 		}
 
-		if(!CacheConfig.music){
+		if(!Settings.data.cacheMusic){
 			Assets.cache.removeSound(Paths.inst(SONG.song));
 		}
 

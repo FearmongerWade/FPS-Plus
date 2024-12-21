@@ -25,7 +25,16 @@ import flixel.util.FlxSave;
 
 	public var shaders:Bool = true;
 	public var flashing:Bool = true;
+
+	// -- Cache -- // 
+
+	public var cacheMusic:Bool = false;
+	public var cacheCharacters:Bool = true;
+	public var cacheGraphics:Bool = false;
+
+	public var firstRun:Bool = true;
 }
+
 class Settings
 {
 	public static var defaultData:SaveVariables = {};

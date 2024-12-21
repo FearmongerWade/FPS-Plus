@@ -30,9 +30,7 @@ class Startup extends FlxState
                                 "Cocoa", "Eggnog", "Winter-Horrorland", 
                                 "Senpai", "Roses", "Thorns",
                                 "Ugh", "Guns", "Stress",
-                                "Darnell", "Lit-Up", "2hot", "Blazin",
-                                "Lil-Buddies",
-                                "klaskiiLoop", "freeplayRandom"]; //Start of the non-gameplay songs.
+                                "klaskiiLoop"]; //Start of the non-gameplay songs.
                                 
     //List of character graphics and some other stuff.
     //Just in case it want to do something with it later.
@@ -47,9 +45,7 @@ class Startup extends FlxState
                                     "week4/Mom_Assets", "week4/momCar",
                                     "week5/mom_dad_christmas_assets", "week5/monsterChristmas",
                                     "week6/senpai", "week6/spirit",
-                                    "week7/tankmanCaptain",
-                                    "weekend1/darnell",
-                                    "weekend1/Nene", "weekend1/abot/aBotViz", "weekend1/abot/stereoBG"];
+                                    "week7/tankmanCaptain"];
 
     var graphicsCached:Bool;
     var startCachingGraphics:Bool = false;
@@ -65,8 +61,7 @@ class Startup extends FlxState
                                     "week6/weeb/animatedEvilSchool", "week6/weeb/senpaiCrazy",
                                     "week7/stage/tank0", "week7/stage/tank1", "week7/stage/tank2", "week7/stage/tank3", "week7/stage/tank4", "week7/stage/tank5", "week7/stage/tankmanKilled1", 
                                     "week7/stage/smokeLeft", "week7/stage/smokeRight", "week7/stage/tankBuildings", "week7/stage/tankClouds", "week7/stage/tankGround", "week7/stage/tankMountains", "week7/stage/tankRolling", "week7/stage/tankRuins", "week7/stage/tankSky", "week7/stage/tankWatchtower",
-                                    "weekend1/phillyStreets/phillyCars","weekend1/phillyStreets/phillyConstruction","weekend1/phillyStreets/phillyForeground","weekend1/phillyStreets/phillyForegroundCity","weekend1/phillyStreets/phillyHighway","weekend1/phillyStreets/phillyHighwayLights","weekend1/phillyStreets/phillyHighwayLights_lightmap","weekend1/phillyStreets/phillySkybox","weekend1/phillyStreets/phillySkyline","weekend1/phillyStreets/phillySmog","weekend1/phillyStreets/phillyTraffic","weekend1/phillyStreets/phillyTraffic_lightmap","weekend1/phillyStreets/SpraycanPile",  
-                                    "weekend1/phillyBlazin/lightning", "weekend1/phillyBlazin/skyBlur", "weekend1/phillyBlazin/streetBlur"];
+                                    ];
 
     var cacheStart:Bool = false;
 
@@ -79,7 +74,6 @@ class Startup extends FlxState
         SaveManager.global();
 
         FlxG.mouse.visible = false;
-        FlxG.sound.muteKeys = null;
         FlxG.game.focusLostFramerate = 15;
         FlxG.drawFramerate = FlxG.updateFramerate = Settings.data.framerate;
 
@@ -102,12 +96,12 @@ class Startup extends FlxState
         FlxUIStateExt.defaultTransOut = ScreenWipeOut;
         FlxUIStateExt.defaultTransOutArgs = [0.6];
 
-        if(!CacheConfig.check())
+        if(FlxG.save.data.firstRun == null)
             openPreloadSettings();
         else{
-            songsCached = !CacheConfig.music;
-            charactersCached = !CacheConfig.characters;
-            graphicsCached = !CacheConfig.graphics;
+            songsCached = !Settings.data.cacheMusic;
+            charactersCached = !Settings.data.cacheCharacters;
+            graphicsCached = !Settings.data.cacheGraphics;
         }
 
         hasEe2 = Utils.exists(Paths.inst("Lil-Buddies"));
