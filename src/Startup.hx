@@ -65,10 +65,6 @@ class Startup extends FlxState
 
     var cacheStart:Bool = false;
 
-    public static var thing = false;
-
-    public static var hasEe2:Bool;
-
 	override function create()
 	{
         SaveManager.global();
@@ -103,8 +99,6 @@ class Startup extends FlxState
             charactersCached = !Settings.data.cacheCharacters;
             graphicsCached = !Settings.data.cacheGraphics;
         }
-
-        hasEe2 = Utils.exists(Paths.inst("Lil-Buddies"));
 
         splash = new FlxSprite(0, 0);
         splash.frames = Paths.getSparrowAtlas('fpsPlus/rozeSplash');
