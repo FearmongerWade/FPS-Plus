@@ -17,6 +17,7 @@ class Main extends Sprite
 		super();
 
 		SaveManager.global();
+		Settings.load();
 
 		addChild(new FlxGame(0, 0, Startup, 60, 60, true));
 

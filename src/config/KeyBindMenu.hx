@@ -68,12 +68,6 @@ class KeyBindMenu extends FlxUIStateExt
         customTransIn = new WeirdBounceIn(0.6);
 		customTransOut = new WeirdBounceOut(0.6);
 
-        if(!ConfigMenu.USE_MENU_MUSIC && ConfigMenu.USE_LAYERED_MUSIC){
-            songLayer = FlxG.sound.play(Paths.music(ConfigMenu.keySongTrack), 0, true);
-            songLayer.time = FlxG.sound.music.time;
-            songLayer.fadeIn(0.6);
-        }
-
         bg = new FlxSprite(-80).loadGraphic(Paths.image('menu/menuDesat'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0;
@@ -364,14 +358,9 @@ class KeyBindMenu extends FlxUIStateExt
 
     }
 
-    function exit() {
-        if(!ConfigMenu.USE_MENU_MUSIC && ConfigMenu.USE_LAYERED_MUSIC){
-            songLayer.fadeOut(0.5, 0, function(x){
-                songLayer.stop();
-            });
-        }
-        ConfigMenu.startSong = false;
-        switchState(new ConfigMenu());
+    function exit() 
+    {
+        switchState(new options.OptionsState());
         FlxG.sound.play(Paths.sound('cancelMenu'));
     }
 

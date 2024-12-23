@@ -29,7 +29,7 @@ import flixel.util.FlxSave;
 	// -- Cache -- // 
 
 	public var cacheMusic:Bool = false;
-	public var cacheCharacters:Bool = true;
+	public var cacheCharacters:Bool = false;
 	public var cacheGraphics:Bool = false;
 
 	public var firstRun:Bool = true;
