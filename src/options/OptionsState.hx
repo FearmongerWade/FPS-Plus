@@ -32,7 +32,8 @@ class OptionsState extends FlxUIStateExt
     {
         super.create();
 
-        FlxG.sound.playMusic(Paths.music('chartEditorLoop'));
+        if (!FlxG.sound.music.playing)
+            FlxG.sound.playMusic(Paths.music('chartEditorLoop'));
         FlxG.mouse.visible = true;
         Settings.load();
 
@@ -58,8 +59,6 @@ class OptionsState extends FlxUIStateExt
 
         for (i in 0...options.length)
         {
-            var steve:Float = window.x+5;
-            var billy:Float = window.y+30;
             var item = new FlxSprite();
             item.frames = Paths.getSparrowAtlas(path+'option_items');
             item.animation.addByPrefix('off', options[i] + '_off', 1);
@@ -77,23 +76,11 @@ class OptionsState extends FlxUIStateExt
             }
 
             grpOptions.add(item);
-            switch(i)
-            {
-                case 0: // downscroll
-                    item.setPosition(steve, billy);
-                case 1: // ghost tapping
-                    item.setPosition(steve+150, billy);
-                case 2: // shaders
-                    item.setPosition(steve+300, billy);
-                case 3: // flashing
-                    item.setPosition(steve, billy+150);
-                case 4: // keybinds
-                    item.setPosition(steve+150, billy+150);
-                case 5: // offset
-                    item.setPosition(steve+300, billy+150);
-                case 6: // framerate
-                    item.setPosition(steve, billy+300);
-            }
+            
+            var stu:Float = window.x+5;
+            var billy:Float = window.y+30;
+            item.x = stu + ((i % 3) * 155);
+            item.y = billy + (Math.floor(i/3) * 155);
         }
 
         check();
@@ -164,6 +151,8 @@ class OptionsState extends FlxUIStateExt
     {
         Settings.save();
         FlxG.mouse.visible = false;
+        FlxG.sound.music.stop();
+        FlxG.sound.play(Paths.sound('cancelMenu'));
 
         if (onPlayState)
         {
