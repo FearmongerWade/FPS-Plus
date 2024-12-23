@@ -17,6 +17,7 @@ import flixel.util.FlxColor;
 import lime.utils.Assets;
 import flixel.text.FlxText;
 import extensions.flixel.FlxTextExt;
+import options.OptionsState;
 
 using StringTools;
 
@@ -203,6 +204,7 @@ class MainMenuState extends MusicBeatState
 										switchState(new old.FreeplayStateOld());
 										trace("Freeplay Menu Selected");
 									case 'options':
+										OptionsState.onPlayState = false;
 										switchState(new options.OptionsState());
 										trace("options time");
 								}

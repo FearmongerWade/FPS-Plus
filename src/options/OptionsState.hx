@@ -11,7 +11,9 @@ package options;
 
 class OptionsState extends FlxUIStateExt
 {
+    public static var onPlayState:Bool = false;
     var path:String = 'menu/options/';
+
     var options:Array<String> = [
         'downscroll',
         'ghostTapping',
@@ -161,9 +163,19 @@ class OptionsState extends FlxUIStateExt
     function backToMenu()
     {
         Settings.save();
-
         FlxG.mouse.visible = false;
-        switchState(new MainMenuState());
+
+        if (onPlayState)
+        {
+            PlayState.instance.tweenManager.clear();
+			PlayState.instance.switchState(new PlayState());
+			PlayState.sectionStart = false;
+			PlayState.replayStartCutscene = false;
+			FlxG.sound.music.stop();
+			FlxG.sound.play(Paths.sound('scrollMenu'), 0.8);
+        }
+        else
+            switchState(new MainMenuState());
     }
 
     function check()

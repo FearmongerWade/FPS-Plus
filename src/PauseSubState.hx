@@ -13,6 +13,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.sound.FlxSound;
 import flixel.util.FlxColor;
+import options.OptionsState;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -164,8 +165,8 @@ class PauseSubState extends MusicBeatSubstate
 					
 				case "Options":
 					PlayState.instance.tweenManager.clear();
-					PlayState.instance.switchState(new ConfigMenu());
-					ConfigMenu.exitTo = PlayState;
+					OptionsState.onPlayState = true;
+					PlayState.instance.switchState(new options.OptionsState());
 					PlayState.replayStartCutscene = false;
 					pauseMusic.fadeOut(0.5, 0);
 					FlxG.sound.play(Paths.sound('scrollMenu'), 0.8);
