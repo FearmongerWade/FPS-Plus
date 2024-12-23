@@ -1,68 +1,42 @@
 package;
 
-import flixel.util.FlxTimer;
-import flixel.system.debug.console.ConsoleUtil;
-import flixel.math.FlxPoint;
-import config.*;
-import title.TitleScreen;
-import freeplay.FreeplayState;
-import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSprite;
 import flixel.effects.FlxFlicker;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-import lime.utils.Assets;
-import flixel.text.FlxText;
-import extensions.flixel.FlxTextExt;
+import lime.app.Application;
+
+import title.TitleScreen;
 import options.OptionsState;
 
 using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	
-	public static var optionShit:Array<String> = ['storymode', 'freeplay', "options"];
+	var optionShit:Array<String> = [
+		'storymode', 
+		'freeplay', 
+		'options'
+	];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
-	var camTarget:FlxPoint = new FlxPoint();
-	var instantCamFollow:Bool = true;
-
-	var versionText:FlxTextExt;
-	var keyWarning:FlxTextExt;
-	var canCancelWarning:Bool = true;
-
-	public static var fromFreeplay:Bool = false;
-
-	public static final lerpSpeed:Float = 0.01;
-	final warningDelay:Float = 10;
-
-	public static final version:String = "v5.0.2";
 
 	override function create()
 	{
+		// -- Setting up -- // 
+
 		if (!FlxG.sound.music.playing)
-		{	
 			FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), TitleScreen.titleMusicVolume);
-		}
 
 		persistentUpdate = persistentDraw = true;
 
-		if(fromFreeplay){
-			fromFreeplay = false;
-			customTransIn = new InstantTransition();
-		}
+		// -- Assets -- //
 
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menu/menuBG'));
-		bg.scrollFactor.x = 0;
-		bg.scrollFactor.y = 0.18;
+		var scroll:Float = 0.25;
+		var bg = new FlxSprite(-80).loadGraphic(Paths.image('menu/menuBG'));
+		bg.scrollFactor.set(0, scroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.18));
 		bg.updateHitbox();
 		bg.screenCenter();
@@ -73,15 +47,13 @@ class MainMenuState extends MusicBeatState
 		add(camFollow);
 	
 		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menu/menuBGMagenta'));
-		magenta.scrollFactor.x = 0;
-		magenta.scrollFactor.y = 0.18;
+		magenta.scrollFactor.set(0, scroll);
 		magenta.setGraphicSize(Std.int(magenta.width * 1.18));
 		magenta.updateHitbox();
 		magenta.screenCenter();
 		magenta.visible = false;
 		magenta.antialiasing = true;
 		add(magenta);
-		// magenta.scrollFactor.set();
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -90,7 +62,6 @@ class MainMenuState extends MusicBeatState
 		{
 			var menuItem:FlxSprite = new FlxSprite(0, 60 + (i * 160));
 			menuItem.frames = Paths.getSparrowAtlas("menu/main/" + optionShit[i]);
-			
 			menuItem.animation.addByPrefix('idle', "idle", 24);
 			menuItem.animation.addByPrefix('selected', "selected", 24);
 			menuItem.animation.play('idle');
@@ -101,62 +72,32 @@ class MainMenuState extends MusicBeatState
 			menuItem.antialiasing = true;
 		}
 
-		FlxG.camera.follow(camFollow);
-
-		versionText = new FlxTextExt(5, FlxG.height - 21, 0, "FPS Plus: " + version, 16);
+		var versionText = new FlxTextExt(5, FlxG.height - 21, 0, "FPS Plus: " + Application.current.meta.get('version'), 16);
 		versionText.scrollFactor.set();
 		versionText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionText);
 
-		keyWarning = new FlxTextExt(5, FlxG.height - 21 + 16, 0, "If your controls aren't working, try pressing CTRL + BACKSPACE to reset them.", 16);
-		keyWarning.scrollFactor.set();
-		keyWarning.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		keyWarning.alpha = 0;
-		add(keyWarning);
-
-		FlxTween.tween(versionText, {y: versionText.y - 16}, 0.75, {ease: FlxEase.quintOut, startDelay: warningDelay});
-		FlxTween.tween(keyWarning, {alpha: 1, y: keyWarning.y - 16}, 0.75, {ease: FlxEase.quintOut, startDelay: warningDelay});
-
-		new FlxTimer().start(warningDelay, function(t){
-			canCancelWarning = false;
-		});
-
-		// NG.core.calls.event.logEvent('swag').send();
-
-		instantCamFollow = true;
-
 		changeItem();
 
 		super.create();
+
+		FlxG.camera.follow(camFollow, null, 2);
 	}
 
 	var selectedSomethin:Bool = false;
 
-	override function update(elapsed:Float){
-
-		if(canCancelWarning && (Binds.justPressed("menuUp") || Binds.justPressed("menuDown")) || Binds.justPressed("menuAccept")){
-			canCancelWarning = false;
-			FlxTween.cancelTweensOf(versionText);
-			FlxTween.cancelTweensOf(keyWarning);
-		}
-	
-		if (!selectedSomethin){
-			if (Binds.justPressed("menuUp")){
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+	override function update(elapsed:Float)
+	{
+		if (!selectedSomethin)
+		{
+			if (Binds.justPressed("menuUp"))
 				changeItem(-1);
-			}
-			else if (Binds.justPressed("menuDown")){
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(1);
-			}
 
-			if (FlxG.keys.justPressed.BACKSPACE && FlxG.keys.pressed.CONTROL){
-				Binds.resetToDefaultControls();
-				FlxG.sound.play(Paths.sound('cancelMenu'));
-			}
-			else if (Binds.justPressed("menuBack") && !FlxG.keys.pressed.CONTROL){
+			if (Binds.justPressed("menuDown"))
+				changeItem(1);
+
+			if (Binds.justPressed("menuBack"))
 				switchState(new TitleScreen());
-			}
 
 			if (Binds.justPressed("menuAccept"))
 			{
@@ -167,9 +108,8 @@ class MainMenuState extends MusicBeatState
 					
 					switch (daChoice){
 						case 'freeplay':
-							if(Settings.data.cacheMusic){
+							if(Settings.data.cacheMusic)
 								FlxG.sound.music.stop();
-							}
 						case 'options':
 							FlxG.sound.music.stop();
 					}
@@ -194,14 +134,11 @@ class MainMenuState extends MusicBeatState
 									case 'storymode':
 										StoryMenuState.curWeek = 0;
 										switchState(new StoryMenuState());
-										trace("Story Menu Selected");
 									case 'freeplay':
 										switchState(new old.FreeplayStateOld());
-										trace("Freeplay Menu Selected");
 									case 'options':
 										OptionsState.onPlayState = false;
 										switchState(new options.OptionsState());
-										trace("options time");
 								}
 							});
 						}
@@ -209,43 +146,26 @@ class MainMenuState extends MusicBeatState
 				}
 		}
 
-		if(!instantCamFollow){
-			camFollow.x = Utils.fpsAdjsutedLerp(camFollow.x, camTarget.x, lerpSpeed);
-			camFollow.y = Utils.fpsAdjsutedLerp(camFollow.y, camTarget.y, lerpSpeed);
-		}
-		else{
-			camFollow.x = camTarget.x;
-			camFollow.y = camTarget.y;
-			instantCamFollow = false;
-		}
-
 		super.update(elapsed);
+	}
+
+	function changeItem(huh:Int = 0)
+	{
+		FlxG.sound.play(Paths.sound('scrollMenu'));
+
+		curSelected = FlxMath.wrap(curSelected + huh, 0, optionShit.length - 1);
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			spr.screenCenter(X);
-		});
-	}
-
-	function changeItem(huh:Int = 0){
-		curSelected += huh;
-
-		if (curSelected >= menuItems.length){
-			curSelected = 0;
-		}
- 		if (curSelected < 0){
-			curSelected = menuItems.length - 1;
-		}
-
-		menuItems.forEach(function(spr:FlxSprite){
 			spr.animation.play('idle');
 
-			if (spr.ID == curSelected){
+			if (spr.ID == curSelected)
 				spr.animation.play('selected');
-				camTarget.set(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
-			}
 
 			spr.updateHitbox();
 		});
+
+		camFollow.x = menuItems.members[curSelected].getGraphicMidpoint().x;
+		camFollow.y = menuItems.members[curSelected].getGraphicMidpoint().y - (menuItems.length > 4 ? menuItems.length * 8 : 0);
 	}
 }

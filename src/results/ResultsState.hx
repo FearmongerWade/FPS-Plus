@@ -4,7 +4,6 @@ import openfl.filters.ShaderFilter;
 import shaders.ColorGradientShader;
 import flixel.graphics.frames.FlxBitmapFont;
 import flixel.text.FlxBitmapText;
-import freeplay.FreeplayState;
 import flixel.math.FlxPoint;
 import extensions.flixel.FlxTextExt;
 import freeplay.ScrollingText;
@@ -528,7 +527,6 @@ class ResultsState extends FlxUIStateExt
                 });
 			case "freeplay":
                 customTransOut = new StickerOut();
-			    FreeplayState.playStickerIntro = true;
 				switchState(new old.FreeplayStateOld());
                 FlxTween.tween(FlxG.sound.music, {pitch: 3}, 0.1, {onComplete: function(t){
                     FlxTween.tween(FlxG.sound.music, {pitch: 0.5}, 0.65);

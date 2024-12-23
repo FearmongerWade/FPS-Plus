@@ -8,7 +8,6 @@ import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
 import haxe.Json;
 import results.ResultsState;
-import freeplay.FreeplayState;
 
 #if sys
 import sys.FileSystem;
