@@ -41,7 +41,7 @@ class Startup extends FlxState
                                     "GF_assets", "week4/gfCar", "week5/gfChristmas", "week6/gfPixel", "week7/gfTankmen",
                                     "week1/DADDY_DEAREST", 
                                     "week2/spooky_kids_assets", "week2/Monster_Assets",
-                                    "week3/Pico_FNF_assetss", "week7/picoSpeaker", "weekend1/pico_all",  "weekend1/pico_death",  "weekend1/Pico_Death_Retry",  "weekend1/Pico_Intro",  "weekend1/picoBlazinDeathConfirm", 
+                                    "week3/Pico_FNF_assetss", "week7/picoSpeaker", 
                                     "week4/Mom_Assets", "week4/momCar",
                                     "week5/mom_dad_christmas_assets", "week5/monsterChristmas",
                                     "week6/senpai", "week6/spirit",
