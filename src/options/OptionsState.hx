@@ -32,6 +32,7 @@ class OptionsState extends FlxUIStateExt
 
         FlxG.sound.playMusic(Paths.music('chartEditorLoop'));
         FlxG.mouse.visible = true;
+        Settings.load();
 
         var bg = new FlxSprite().loadGraphic(Paths.image('menu/menuBGBlue'));
         add(bg);
@@ -66,9 +67,9 @@ class OptionsState extends FlxUIStateExt
             switch(i)
             {
                 case 0:
-                    item.animation.play(FlxG.save.data.downscroll ? 'on' : 'off');
+                    item.animation.play(Settings.data.downscroll ? 'on' : 'off');
                 case 1:
-                    item.animation.play(FlxG.save.data.ghostTapping ? 'on' : 'off');
+                    item.animation.play(Settings.data.ghostTapping ? 'on' : 'off');
                 default:
                     item.animation.play('off');
             }
@@ -154,12 +155,12 @@ class OptionsState extends FlxUIStateExt
 
         check();
 
-        FlxG.save.flush();
+        Settings.save();
     }
 
     function backToMenu()
     {
-        FlxG.save.flush();
+        Settings.save();
 
         FlxG.mouse.visible = false;
         switchState(new MainMenuState());
