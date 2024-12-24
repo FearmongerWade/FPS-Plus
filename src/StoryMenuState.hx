@@ -100,6 +100,8 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+		ImageCache.clear();
+		
 		if (FlxG.sound.music == null || !FlxG.sound.music.playing)
 			FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), TitleScreen.titleMusicVolume);
 

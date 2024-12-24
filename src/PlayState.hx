@@ -257,11 +257,13 @@ class PlayState extends MusicBeatState
 
 	public var arbitraryData:Map<String, Dynamic> = new Map<String, Dynamic>();
 	
-	override public function create(){
-
+	override public function create()
+	{
 		instance = this;
 		FlxG.mouse.visible = false;
 		add(tweenManager);
+
+		ImageCache.clear();
 
 		customTransIn = new ScreenWipeIn(1.2);
 		customTransOut = new ScreenWipeOut(0.6);

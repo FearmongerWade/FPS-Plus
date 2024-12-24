@@ -29,6 +29,8 @@ class MainMenuState extends MusicBeatState
 	{
 		// -- Setting up -- // 
 
+		ImageCache.clear();
+
 		if (!FlxG.sound.music.playing)
 			FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), TitleScreen.titleMusicVolume);
 

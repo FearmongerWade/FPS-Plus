@@ -83,9 +83,10 @@ class CacheReload extends FlxState
     override function update(elapsed) 
     {
 
-        if(songsCached && charactersCached && graphicsCached){
-            
+        if(songsCached && charactersCached && graphicsCached)
+        {    
             System.gc();
+            ImageCache.trackedAssets = [];
             FlxG.switchState(nextState);
 
         }

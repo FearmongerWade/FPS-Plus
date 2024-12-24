@@ -40,6 +40,8 @@ class FreeplayStateOld extends MusicBeatState
 
 	override function create()
 	{
+		ImageCache.clear();
+		
 		curSelected = 0;
 
 		addWeek(['Tutorial'], 1, ['gf-menu']);

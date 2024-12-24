@@ -18,12 +18,13 @@ class Paths
 
         var data:String = file(key, "images", "png");
 
-        if(ImageCache.exists(data) && !forceLoadFromDisk){
-            //trace(key + " is in the cache");
+        if(ImageCache.exists(data) && !forceLoadFromDisk)
             return ImageCache.get(data);
-        }
-        else{
-            //trace(key + " loading from file");
+        else
+        {
+            if(!ImageCache.trackedAssets.contains(data))
+                ImageCache.trackedAssets.push(data);
+            
             return data;
         }
             
