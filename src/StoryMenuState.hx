@@ -3,16 +3,8 @@ package;
 import haxe.Json;
  
 import title.*;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
+import flixel.graphics.frames.FlxAtlasFrames;
 import lime.net.curl.CURLCode;
 
 using StringTools;
@@ -31,8 +23,7 @@ class StoryMenuState extends MusicBeatState
 		4 => ['Satin-Panties', "High", "Milf"],
 		5 => ['Cocoa', 'Eggnog', 'Winter-Horrorland'],
 		6 => ['Senpai', 'Roses', 'Thorns'],
-		7 => ['Ugh', 'Guns', 'Stress'],
-		101 => ['Darnell', 'Lit-Up', '2hot', 'Blazin']
+		7 => ['Ugh', 'Guns', 'Stress']
 	];
 	
 	static var curDifficulty:Int = 1;
@@ -47,8 +38,7 @@ class StoryMenuState extends MusicBeatState
 		['mom', 'bf', 'gf'],
 		['parents-xmas', 'bf', 'gf'],
 		['senpai', 'bf', 'gf'],
-		['tankman', 'bf', 'gf'],
-		['darnell', 'pico-player', 'nene']
+		['tankman', 'bf', 'gf']
 	];
 
 	public static var weekNames:Map<Int, String> = [
@@ -59,8 +49,7 @@ class StoryMenuState extends MusicBeatState
 		4 => "Mommy Must Murder",
 		5 => "Red Snow",
 		6 => "Hating Simulator ft. Moawling",
-		7 => "Tankman",
-		101 => "Due Debts"
+		7 => "Tankman"
 	];
 
 	public static var weekNamesShort:Map<Int, String> = [
@@ -71,8 +60,7 @@ class StoryMenuState extends MusicBeatState
 		4 => "Mommy Must Murder",
 		5 => "Red Snow",
 		6 => "Hating Simulator",
-		7 => "Tankman",
-		101 => "Due Debts"
+		7 => "Tankman"
 	];
 
 	public static var weekNumber:Array<Int> = [
@@ -83,8 +71,7 @@ class StoryMenuState extends MusicBeatState
 		4,
 		5,
 		6,
-		7,
-		101
+		7
 	];
 
 	var txtWeekTitle:FlxText;
@@ -107,16 +94,14 @@ class StoryMenuState extends MusicBeatState
 
 	public function new(?stickerIntro:Bool = false) {
 		super();
-		if(stickerIntro){
+		if(stickerIntro)
 			customTransIn = new transition.data.StickerIn();
-		}
 	}
 
 	override function create()
 	{
-		if (FlxG.sound.music == null || !FlxG.sound.music.playing){
+		if (FlxG.sound.music == null || !FlxG.sound.music.playing)
 			FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), TitleScreen.titleMusicVolume);
-		}
 
 		persistentUpdate = persistentDraw = true;
 
@@ -155,7 +140,6 @@ class StoryMenuState extends MusicBeatState
 			grpWeekText.add(weekThing);
 
 			weekThing.screenCenter(X);
-			weekThing.antialiasing = true;
 			// weekThing.updateHitbox();
 
 			// Needs an offset thingie
@@ -220,9 +204,8 @@ class StoryMenuState extends MusicBeatState
 
 		updateText();
 
-		if(fromPlayState){
+		if(fromPlayState)
 			customTransIn = new StickerIn();
-		}
 
 		fromPlayState = false;
 
@@ -245,7 +228,7 @@ class StoryMenuState extends MusicBeatState
 		// scoreText.setFormat('VCR OSD Mono', 32);
 		lerpScore = Math.floor(Utils.fpsAdjsutedLerp(lerpScore, intendedScore, 0.5));
 
-		scoreText.text = "WEEK SCORE:" + lerpScore;
+		scoreText.text = "LEVEL SCORE:" + lerpScore;
 
 		txtWeekTitle.text = weekNames[weekNumber[curWeek]].toUpperCase();
 		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
@@ -264,14 +247,10 @@ class StoryMenuState extends MusicBeatState
 			if (!selectedWeek)
 			{
 				if (Binds.justPressed("menuUp"))
-				{
 					changeWeek(-1);
-				}
 
 				if (Binds.justPressed("menuDown"))
-				{
 					changeWeek(1);
-				}
 
 				if (Binds.pressed("menuRight"))
 					rightArrow.animation.play('press')
@@ -290,9 +269,7 @@ class StoryMenuState extends MusicBeatState
 			}
 
 			if (Binds.justPressed("menuAccept"))
-			{
 				selectWeek();
-			}
 		}
 
 		if (Binds.justPressed("menuBack") && !movedBack && !selectedWeek)
@@ -317,7 +294,7 @@ class StoryMenuState extends MusicBeatState
 			{
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
-				grpWeekText.members[curWeek].startFlashing();
+				grpWeekText.members[curWeek].isFlashing = true;
 				grpWeekCharacters.members[1].animation.play('confirm');
 				grpWeekCharacters.members[1].centerOffsets();
 				stopspamming = true;
@@ -447,7 +424,7 @@ class StoryMenuState extends MusicBeatState
 		repositionCharacter(1);
 		repositionCharacter(2);
 
-		txtTracklist.text = "Tracks\n";
+		txtTracklist.text = "TRACKS\n";
 
 		var stringThing:Array<String> = weekData[weekNumber[curWeek]];
 
@@ -457,8 +434,6 @@ class StoryMenuState extends MusicBeatState
 		}
 
 		txtTracklist.text += "\n";
-
-		txtTracklist.text = txtTracklist.text.toUpperCase();
 
 		txtTracklist.screenCenter(X);
 		txtTracklist.x -= FlxG.width * 0.35;

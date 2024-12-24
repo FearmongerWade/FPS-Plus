@@ -1,59 +1,40 @@
 package;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.group.FlxSpriteGroup;
-import flixel.math.FlxMath;
-import flixel.util.FlxColor;
-
-class MenuItem extends FlxSpriteGroup
+class MenuItem extends FlxSprite
 {
 	public var targetY:Float = 0;
-	public var week:FlxSprite;
-	public var flashingInt:Int = 0;
 
-	public function new(x:Float, y:Float, weekNum:Int = 0){
+	public function new(x:Float, y:Float, weekNum:Int = 0)
+	{
 		super(x, y);
 
-		var weekNumber:Int = weekNum % 100;
-		var weekPrefix:String = "week";
-
-		switch (weekNum - weekNumber){
-			case 100:
-				weekPrefix = "weekend";
-		}
-
-		trace(weekNum);
-		trace(weekNumber);
-		trace(weekPrefix);
-
-		week = new FlxSprite().loadGraphic(Paths.image('menu/story/weeks/' + weekPrefix + weekNumber));
-		add(week);
+		loadGraphic(Paths.image('menu/story/weeks/week' + weekNum));
+		antialiasing = true;
 	}
 
-	private var isFlashing:Bool = false;
+	public var isFlashing(default, set):Bool = false;
+	private var flashingElapsed:Float = 0;
+	var flashColor = 0xff33ffff;
+	var flash_per_second:Int = 6;
 
-	public function startFlashing():Void{
-		isFlashing = true;
+	public function set_isFlashing(value:Bool = true)
+	{
+		isFlashing = value;
+		flashingElapsed = 0;
+		color = (isFlashing) ? flashColor : FlxColor.WHITE;
+		return isFlashing;
 	}
 
-	// if it runs at 60fps, fake framerate will be 6
-	// if it runs at 144 fps, fake framerate will be like 14, and will update the graphic every 0.016666 * 3 seconds still???
-	// so it runs basically every so many seconds, not dependant on framerate??
-	// I'm still learning how math works thanks whoever is reading this lol
-	var fakeFramerate:Int = Math.round((1 / FlxG.elapsed) / 10);
-
-	override function update(elapsed:Float){
+	override function update(elapsed:Float)
+	{
 		super.update(elapsed);
+
 		y = Utils.fpsAdjsutedLerp(y, (targetY * 120) + 480, 0.17);
 
 		if (isFlashing)
-			flashingInt += 1;
-
-		if (flashingInt % fakeFramerate >= Math.floor(fakeFramerate / 2))
-			week.color = 0xFF33ffff;
-		else
-			week.color = FlxColor.WHITE;
+		{
+			flashingElapsed += elapsed;
+			color = (Math.floor(flashingElapsed * FlxG.updateFramerate * flash_per_second) % 2 == 0) ? flashColor : FlxColor.WHITE;
+		}
 	}
 }
