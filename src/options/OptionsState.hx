@@ -1,14 +1,5 @@
 package options;
 
-/*
-    Hi guys, in today's episode I made the worst options menu known to man
-    This code fucking sucks I know
-    Feel free to kill me
-    Fast
-
-    Yours, Wade
-*/
-
 class OptionsState extends FlxUIStateExt
 {
     public static var onPlayState:Bool = false;
@@ -17,13 +8,14 @@ class OptionsState extends FlxUIStateExt
     var options:Array<String> = [
         'downscroll',
         'ghostTapping',
-        //'shaders',
+        'shaders',
         //'flashing', 
         'keybinds',
         'offset', 
-        'framerate'
+        'framerate',
+        'caching'
     ];
-    var grpOptions:FlxTypedGroup<FlxSprite>;
+    var grpOptions:FlxTypedGroup<OptionIcon>;
     var curSelected = 0;
 
     var selector:FlxSprite;
@@ -43,7 +35,7 @@ class OptionsState extends FlxUIStateExt
         var title = new FlxSprite(580, 40).loadGraphic(Paths.image(path+'title'));
         add(title);
 
-        var window = new FlxSprite(60).makeGraphic(500, 600, 0xffacacac);
+        var window = new FlxSprite(60).makeGraphic(500, 620, 0xffacacac);
         window.screenCenter(Y);
         add(window);
 
@@ -54,36 +46,33 @@ class OptionsState extends FlxUIStateExt
         selector.alpha = 0;
         add(selector);
 
-        grpOptions = new FlxTypedGroup<FlxSprite>();
+        grpOptions = new FlxTypedGroup<OptionIcon>();
         add(grpOptions);
 
         for (i in 0...options.length)
         {
-            var item = new FlxSprite();
-            item.frames = Paths.getSparrowAtlas(path+'option_items');
-            item.animation.addByPrefix('off', options[i] + '_off', 1);
-            item.animation.addByPrefix('on', options[i] + '_on', 1);
+            var item = new OptionIcon(options[i]);
             item.ID = i;
+
+            var stu:Float = window.x+5;
+            var billy:Float = window.y+30;
+            item.x = stu + ((i % 4) * item.width) + 5;
+            item.y = billy + (Math.floor(i/4) * item.height) + 5;
 
             switch(i)
             {
                 case 0:
-                    item.animation.play(Settings.data.downscroll ? 'on' : 'off');
+                    item.animation.curAnim.curFrame = Settings.data.downscroll ? 1 : 0;
                 case 1:
-                    item.animation.play(Settings.data.ghostTapping ? 'on' : 'off');
+                    item.animation.curAnim.curFrame = Settings.data.ghostTapping ? 1 : 0;
+                case 2:
+                    item.animation.curAnim.curFrame = Settings.data.shaders ? 1 : 0;
                 default:
-                    item.animation.play('off');
+                    item.animation.curAnim.curFrame = 0;
             }
 
             grpOptions.add(item);
-            
-            var stu:Float = window.x+5;
-            var billy:Float = window.y+30;
-            item.x = stu + ((i % 3) * 155);
-            item.y = billy + (Math.floor(i/3) * 155);
         }
-
-        check();
     }
 
     var mClick:Bool = true;
@@ -91,12 +80,12 @@ class OptionsState extends FlxUIStateExt
 
     override function update(elapsed:Float)
     {
-        grpOptions.forEach(function(spr:FlxSprite)
+        grpOptions.forEach(function(spr:OptionIcon)
         {
             if (mHover)
                 if (!FlxG.mouse.overlaps(spr))
                 {
-                    spr.scale.set(1,1);
+                    spr.scale.set(1.25,1.25);
                 }
 
             if (FlxG.mouse.overlaps(spr))
@@ -105,7 +94,7 @@ class OptionsState extends FlxUIStateExt
                 {
                     curSelected = spr.ID;
                     mHover = true;
-                    FlxTween.tween(spr.scale, {x:1.05, y:1.05}, 0.5, {ease: FlxEase.elasticOut});
+                    FlxTween.tween(spr.scale, {x:1.3, y:1.3}, 0.5, {ease: FlxEase.elasticOut});
                 }
                 if (FlxG.mouse.justPressed && mClick)
                     selectItem();
@@ -126,12 +115,15 @@ class OptionsState extends FlxUIStateExt
         {
             case 'downscroll':
                 Settings.data.downscroll = !Settings.data.downscroll;
-                grpOptions.members[0].animation.play(Settings.data.downscroll ? 'on' : 'off');
+                grpOptions.members[0].animation.curAnim.curFrame = Settings.data.downscroll ? 1 : 0;
             case 'ghostTapping':
                 Settings.data.ghostTapping = !Settings.data.ghostTapping;
-                grpOptions.members[1].animation.play(Settings.data.ghostTapping ? 'on' : 'off');
+                grpOptions.members[1].animation.curAnim.curFrame = Settings.data.ghostTapping ? 1 : 0;
+            case 'shaders':
+                Settings.data.shaders = !Settings.data.shaders;
+                grpOptions.members[2].animation.curAnim.curFrame = Settings.data.shaders ? 1 : 0;
             case 'keybinds':
-                grpOptions.members[2].animation.play('on');
+                grpOptions.members[3].animation.curAnim.curFrame = 1;
                 switchState(new config.KeyBindMenu());
                 trace('opening the keybinds submenu');
             case 'offset':
@@ -141,8 +133,6 @@ class OptionsState extends FlxUIStateExt
             default:
                 trace('fuck me');
         }
-
-        check();
 
         Settings.save();
     }
@@ -165,11 +155,5 @@ class OptionsState extends FlxUIStateExt
         }
         else
             switchState(new MainMenuState());
-    }
-
-    function check()
-    {
-        trace('hi, downscroll is ' + Settings.data.downscroll);
-        trace('also! ghost tapping is currently ' + Settings.data.ghostTapping);
     }
 }
