@@ -35,12 +35,10 @@ class OptionsState extends FlxUIStateExt
         var title = new FlxSprite(580, 40).loadGraphic(Paths.image(path+'title'));
         add(title);
 
-        var window = new FlxSprite(60).makeGraphic(500, 620, 0xffacacac);
+        var window = new FlxSprite(50).loadGraphic(Paths.image(path+'itemsWindow'));
         window.screenCenter(Y);
+        window.antialiasing = true;
         add(window);
-
-        var text = new FlxText(65, 60, 0, 'crazy window wade, you dumb slut', 12);
-        add(text);
 
         selector = new FlxSprite().makeGraphic(390, 80, 0xff320b9e);
         selector.alpha = 0;
@@ -54,10 +52,10 @@ class OptionsState extends FlxUIStateExt
             var item = new OptionIcon(options[i]);
             item.ID = i;
 
-            var stu:Float = window.x+5;
-            var billy:Float = window.y+30;
-            item.x = stu + ((i % 4) * item.width) + 5;
-            item.y = billy + (Math.floor(i/4) * item.height) + 5;
+            var stu:Float = window.x+10;
+            var billy:Float = window.y+50;
+            item.x = stu + ((i % 3) * item.width) + 12;
+            item.y = billy + (Math.floor(i/3) * item.height) + 10;
 
             switch(i)
             {
@@ -85,7 +83,7 @@ class OptionsState extends FlxUIStateExt
             if (mHover)
                 if (!FlxG.mouse.overlaps(spr))
                 {
-                    spr.scale.set(1.25,1.25);
+                    spr.scale.set(1, 1);
                 }
 
             if (FlxG.mouse.overlaps(spr))
@@ -94,7 +92,7 @@ class OptionsState extends FlxUIStateExt
                 {
                     curSelected = spr.ID;
                     mHover = true;
-                    FlxTween.tween(spr.scale, {x:1.3, y:1.3}, 0.5, {ease: FlxEase.elasticOut});
+                    FlxTween.tween(spr.scale, {x:1.05, y:1.05}, 0.5, {ease: FlxEase.elasticOut});
                 }
                 if (FlxG.mouse.justPressed && mClick)
                     selectItem();
@@ -109,7 +107,7 @@ class OptionsState extends FlxUIStateExt
 
     function selectItem()
     {
-        FlxG.sound.play(Paths.sound('confirmMenu'));
+        FlxG.sound.play(Paths.sound('scrollMenu'));
 
         switch (options[curSelected])
         {
@@ -122,15 +120,16 @@ class OptionsState extends FlxUIStateExt
             case 'shaders':
                 Settings.data.shaders = !Settings.data.shaders;
                 grpOptions.members[2].animation.curAnim.curFrame = Settings.data.shaders ? 1 : 0;
-            case 'keybinds':
+            /*case 'keybinds':
                 grpOptions.members[3].animation.curAnim.curFrame = 1;
                 switchState(new config.KeyBindMenu());
                 trace('opening the keybinds submenu');
             case 'offset':
                 trace('opening the offset submenu');    
             case 'framerate':
-                trace('adjust your framerate');
+                trace('adjust your framerate');*/
             default:
+                openSubState(new options.MissingSubState());
                 trace('fuck me');
         }
 
