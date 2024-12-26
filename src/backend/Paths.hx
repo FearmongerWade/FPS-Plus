@@ -33,8 +33,8 @@ class Paths
     inline static public function xml(key:String, ?location:String = "images")
         return file(key, location, "xml");
 
-    inline static public function text(key:String, ?location:String)
-        return 'assets/$key.txt';
+    inline static public function text(key:String, ?location:String = "")
+        return file(key, location, 'txt');
 
     inline static public function json(key:String, ?location:String = "songs")
         return file(key, location, "json");
