@@ -1,10 +1,6 @@
 package debug;
 
-import flixel.FlxObject;
-import flixel.FlxG;
 import flxanimate.FlxAnimate;
-import flixel.FlxSprite;
-import flixel.FlxState;
 import flixel.addons.display.FlxGridOverlay;
 
 using StringTools;

@@ -1,10 +1,5 @@
 package freeplay;
 
-import sys.FileSystem;
-import flixel.sound.FlxSound;
-import flixel.FlxG;
-import flixel.FlxSprite;
-
 class DJCharacter extends AtlasSprite
 {
 

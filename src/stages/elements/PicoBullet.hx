@@ -1,8 +1,5 @@
 package stages.elements;
 
-import flixel.FlxG;
-import flixel.FlxSprite;
-
 class PicoBullet extends FlxSprite
 {
 

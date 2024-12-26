@@ -4,23 +4,10 @@ import openfl.filters.ShaderFilter;
 import shaders.ColorGradientShader;
 import flixel.graphics.frames.FlxBitmapFont;
 import flixel.text.FlxBitmapText;
-import flixel.math.FlxPoint;
-import extensions.flixel.FlxTextExt;
 import freeplay.ScrollingText;
-import flixel.text.FlxText;
 import flixel.addons.display.FlxBackdrop;
-import flixel.group.FlxSpriteGroup;
 import freeplay.DigitDisplay;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.util.FlxTimer;
 import flixel.util.FlxGradient;
-import flixel.FlxSprite;
-import flixel.util.FlxColor;
-import flixel.FlxG;
-import flixel.FlxGame;
-import flixel.FlxCamera;
-import extensions.flixel.FlxUIStateExt;
 
 using StringTools;
 

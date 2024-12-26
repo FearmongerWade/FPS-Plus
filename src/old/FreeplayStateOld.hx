@@ -1,18 +1,8 @@
 package old;
 
-import extensions.flixel.FlxUIStateExt;
 import config.CacheConfig;
 import title.TitleScreen;
 import config.Config;
-import flash.text.TextField;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.addons.display.FlxGridOverlay;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import lime.utils.Assets;
 
 using StringTools;
 
@@ -109,21 +99,6 @@ class FreeplayStateOld extends MusicBeatState
 		selector.size = 40;
 		selector.text = ">";
 		// add(selector);
-
-		var swag:Alphabet = new Alphabet(1, 0, "swag");
-
-		// JUST DOIN THIS SHIT FOR TESTING!!!
-		/* 
-			var md:String = Markdown.markdownToHtml(Utils.getText('CHANGELOG.md'));
-			var texFel:TextField = new TextField();
-			texFel.width = FlxG.width;
-			texFel.height = FlxG.height;
-			// texFel.
-			texFel.htmlText = md;
-			FlxG.stage.addChild(texFel);
-			// scoreText.textField.htmlText = md;
-			trace(md);
-		 */
 
 		super.create();
 	}

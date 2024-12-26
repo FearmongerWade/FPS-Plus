@@ -1,14 +1,7 @@
 package title;
 
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import freeplay.ScrollingText;
 import flixel.addons.display.FlxBackdrop;
-import flixel.text.FlxText;
-import flixel.FlxSprite;
- 
-import flixel.FlxG;
-import extensions.flixel.FlxUIStateExt;
 
 class TitleEasterEgg extends MusicBeatState
 {

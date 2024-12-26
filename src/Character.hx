@@ -1,6 +1,5 @@
 package;
 
-import flixel.math.FlxPoint;
 import characters.CharacterInfoBase;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;

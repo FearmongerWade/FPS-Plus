@@ -1,7 +1,5 @@
 package backend;
 
-import extensions.flixel.FlxUIStateExt;
-
 class MusicBeatState extends FlxUIStateExt
 {
 	private var lastBeat:Float = 0;

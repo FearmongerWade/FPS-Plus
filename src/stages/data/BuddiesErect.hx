@@ -1,9 +1,5 @@
 package stages.data;
 
-import flixel.tweens.FlxTween;
-import flixel.FlxSprite;
-import flixel.math.FlxPoint;
-import flixel.FlxObject;
 import stages.elements.*;
 
 class BuddiesErect extends BaseStage

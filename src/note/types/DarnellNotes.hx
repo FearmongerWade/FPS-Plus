@@ -1,11 +1,7 @@
 package note.types;
 
-import flixel.tweens.FlxEase;
-import flixel.FlxG;
-
 class DarnellNotes extends NoteType
 {
-
     override function defineTypes():Void{
         addNoteType("weekend-1-lightcan", lightcanHit, null);
         addNoteType("weekend-1-kickcan", kickcanHit, null);

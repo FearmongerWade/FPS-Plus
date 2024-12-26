@@ -1,13 +1,5 @@
 package freeplay;
 
-import flixel.sound.FlxSound;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.math.FlxPoint;
-import flixel.group.FlxSpriteGroup;
-
 class DifficultyStars extends FlxSpriteGroup
 {
 

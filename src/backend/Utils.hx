@@ -1,17 +1,11 @@
 package backend;
 
-import flixel.math.FlxPoint;
 import lime.utils.Assets;
 
 import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.macro.Type;
-#if yaml
-import yaml.Yaml;
-import yaml.Parser;
-import yaml.Renderer;
-import yaml.util.ObjectMap;
-#end
+
 using Lambda;
 
 class Utils

@@ -1,10 +1,6 @@
 package transition;
 
-import extensions.flixel.FlxUIStateExt;
 import openfl.system.System;
-import flixel.FlxG;
-import flixel.FlxState;
-import flixel.group.FlxSpriteGroup;
 
 /**
     The base class for state transitions.

@@ -1,6 +1,5 @@
 package;
 
-import extensions.flixel.FlxTextExt;
 import haxe.Json;
 import debug.ChartingState;
 import options.OptionsState;

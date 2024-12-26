@@ -1,11 +1,5 @@
 package;
 
-import flixel.math.FlxPoint;
-import flixel.tweens.FlxTween;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxSpriteGroup;
-
 using StringTools;
 
 class ComboPopup extends FlxSpriteGroup

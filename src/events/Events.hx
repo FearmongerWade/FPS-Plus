@@ -1,7 +1,6 @@
 package events;
 
 import flixel.tweens.FlxTween.FlxTweenManager;
-import flixel.tweens.FlxEase;
 
 using StringTools;
 

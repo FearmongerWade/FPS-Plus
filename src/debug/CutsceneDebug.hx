@@ -2,13 +2,8 @@ package debug;
 
 import cutscenes.ScriptedCutscene;
 import flixel.math.FlxPoint;
-<<<<<<< HEAD
- 
- 
-=======
 import characters.CharacterInfoBase;
 import config.Config;
->>>>>>> parent of 0c57bac (starting with the heavy source code reorganization)
 import openfl.desktop.ClipboardFormats;
 import openfl.desktop.Clipboard;
 import flixel.FlxCamera;

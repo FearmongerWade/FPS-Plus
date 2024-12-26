@@ -1,9 +1,6 @@
 package;
 
 import lime.utils.Assets;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.FlxSprite;
 
 class HealthIcon extends FlxSprite
 {

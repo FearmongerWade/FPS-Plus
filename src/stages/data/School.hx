@@ -1,8 +1,5 @@
 package stages.data;
 
-import flixel.FlxSprite;
-import flixel.math.FlxPoint;
-import flixel.FlxObject;
 import stages.elements.*;
 
 class School extends BaseStage

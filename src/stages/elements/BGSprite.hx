@@ -1,7 +1,5 @@
 package stages.elements;
 
-import flixel.FlxSprite;
-
 class BGSprite extends FlxSprite
 {
 	/**

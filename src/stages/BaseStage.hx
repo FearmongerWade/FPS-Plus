@@ -1,11 +1,6 @@
 package stages;
 
-//import flixel.FlxBasic;
 import flixel.tweens.FlxTween.FlxTweenManager;
-import flixel.FlxBasic;
-import flixel.FlxObject;
-import flixel.group.FlxGroup;
-import flixel.math.FlxPoint;
 
 /**
 	This is the base class for stages. When making your own stage make a new class extending this one.    

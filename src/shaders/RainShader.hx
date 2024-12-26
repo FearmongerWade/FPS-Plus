@@ -1,9 +1,5 @@
 package shaders;
 
-import flixel.FlxCamera;
-import flixel.FlxG;
-import flixel.FlxBasic;
-import flixel.util.FlxColor;
 import openfl.display.ShaderParameter;
 import flixel.system.FlxAssets.FlxShader;
 

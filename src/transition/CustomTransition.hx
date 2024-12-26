@@ -1,10 +1,5 @@
 package transition;
 
-import extensions.flixel.FlxUIStateExt;
-import flixel.FlxState;
-import flixel.FlxG;
-import flixel.FlxCamera;
-
 /**
 	Automatically adds and plays custom state transition animations.
 

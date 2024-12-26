@@ -1,8 +1,5 @@
 package characters;
 
-import flixel.util.FlxColor;
-import flixel.math.FlxPoint;
-
 enum AnimType {
     prefix;
     frames;

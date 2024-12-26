@@ -1,12 +1,10 @@
 package note.types;
 
-import flixel.tweens.FlxEase;
-import flixel.FlxG;
-
 class BlazinNotes extends NoteType
 {
 
-    override function defineTypes():Void{
+    override function defineTypes():Void
+    {
         addNoteType("weekend-1-punchlow", punchlowHit, punchlowMiss);
         addNoteType("weekend-1-punchlowblocked", punchlowblockedHit, punchlowblockedMiss);
         addNoteType("weekend-1-punchlowdodged", punchlowdodgedHit, punchlowdodgedMiss);

@@ -1,17 +1,10 @@
 package;
 
-import flixel.FlxBasic;
 import events.*;
 import objects.note.*;
 import flixel.math.FlxAngle;
-import flixel.group.FlxGroup;
-import flixel.group.FlxSpriteGroup;
 import haxe.Json;
 import results.ResultsState;
-
-#if sys
-import sys.FileSystem;
-#end
 
 import config.*;
 import debug.*;
@@ -24,28 +17,13 @@ import note.types.*;
 import cutscenes.*;
 import cutscenes.data.*;
 import Character;
-import flixel.FlxState;
 import openfl.utils.Assets;
 import flixel.math.FlxRect;
 import openfl.system.System;
-import flixel.FlxCamera;
-import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.addons.transition.FlxTransitionableState;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
-import flixel.sound.FlxSound;
-import flixel.text.FlxText;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
 import flixel.ui.FlxBar;
-import flixel.util.FlxColor;
 import flixel.util.FlxSort;
-import flixel.util.FlxTimer;
-import extensions.flixel.FlxTextExt;
 
 using StringTools;
 

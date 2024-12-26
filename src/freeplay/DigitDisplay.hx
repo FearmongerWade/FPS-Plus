@@ -1,13 +1,5 @@
 package freeplay;
 
-import flixel.util.FlxColor;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
-import flixel.group.FlxSpriteGroup;
-import flixel.FlxSprite;
-
-using StringTools;
-
 class DigitDisplay extends FlxSpriteGroup
 {
     var numString:String;

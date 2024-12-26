@@ -1,11 +1,7 @@
 package stages.elements;
 
-import flixel.FlxObject;
 import flixel.util.FlxAxes;
-import flixel.sound.FlxSound;
-import flixel.FlxG;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
-import flixel.FlxSprite;
 
 class ABot extends FlxTypedSpriteGroup<FlxSprite>
 {

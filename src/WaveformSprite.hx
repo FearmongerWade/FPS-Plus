@@ -1,13 +1,8 @@
 package;
 
-import flixel.util.FlxColor;
 import lime.media.AudioBuffer;
 import lime.utils.Bytes;
-import flixel.sound.FlxSound;
 import openfl.geom.Rectangle;
-import flixel.FlxSprite;
-import flixel.FlxG;
-import flixel.math.FlxMath;
 
 /*
 Adapted from the waveform code from psych engine.

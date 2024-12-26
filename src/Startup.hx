@@ -78,7 +78,6 @@ class Startup extends FlxState
 
         Settings.load();
         Controls.load();
-
         Binds.init();
 
         SaveManager.global();

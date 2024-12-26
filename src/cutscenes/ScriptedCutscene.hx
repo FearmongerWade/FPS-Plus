@@ -1,7 +1,6 @@
 package cutscenes;
 
 import flixel.tweens.FlxTween.FlxTweenManager;
-import flixel.FlxG;
 import flixel.FlxBasic;
 
 class ScriptedCutscene extends FlxBasic

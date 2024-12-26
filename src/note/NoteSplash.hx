@@ -2,15 +2,13 @@ package note;
 
 import openfl.display.BlendMode;
 import openfl.display.BitmapData;
-import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.FlxG;
 
 using StringTools;
 
-class NoteSplash extends FlxSprite{
-
+class NoteSplash extends FlxSprite
+{
     public static var splashPath:String = "ui/noteSplashes";
 
     public function new(x:Float, y:Float, note:Int, ?forceSplashNumber:Null<Int>){

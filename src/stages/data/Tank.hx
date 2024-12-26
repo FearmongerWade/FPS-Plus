@@ -1,12 +1,6 @@
 package stages.data;
 
 import flixel.math.FlxAngle;
-import flixel.FlxG;
-import flixel.group.FlxGroup;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.FlxSprite;
-import flixel.math.FlxPoint;
-import flixel.FlxObject;
 import stages.elements.*;
 
 class Tank extends BaseStage

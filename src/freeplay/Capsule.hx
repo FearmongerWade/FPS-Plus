@@ -1,21 +1,11 @@
 package freeplay;
 
-import flixel.util.FlxTimer;
-import flixel.FlxG;
 import openfl.display.BlendMode;
-import flixel.tweens.FlxEase;
 import flixel.math.FlxRect;
-import flixel.math.FlxPoint;
-import flixel.util.FlxColor;
 import flixel.text.FlxText.FlxTextBorderStyle;
-import extensions.flixel.FlxTextExt;
-import flixel.tweens.FlxTween;
-import flixel.group.FlxSpriteGroup;
-import flixel.FlxSprite;
 
 class Capsule extends FlxSpriteGroup
 {
-
     final capsuleScale:Float = 0.8;
 
     final selectColor:FlxColor = 0xFFFFFFFF;

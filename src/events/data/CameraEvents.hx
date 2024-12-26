@@ -1,8 +1,5 @@
 package events.data;
 
-import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
-
 class CameraEvents extends Events
 {
 

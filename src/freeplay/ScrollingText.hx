@@ -1,10 +1,6 @@
 package freeplay;
 
-import flixel.FlxSprite;
 import flixel.util.FlxAxes;
-import flixel.util.FlxColor;
-import flixel.math.FlxPoint;
-import flixel.text.FlxText;
 import flixel.addons.display.FlxBackdrop;
 
 class ScrollingText

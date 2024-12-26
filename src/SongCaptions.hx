@@ -1,21 +1,5 @@
 package;
 
-#if sys
-import sys.io.File;
-#end
-
-import lime.utils.Assets;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-import flixel.FlxSprite;
-import flixel.group.FlxSpriteGroup;
-import flixel.text.FlxText;
-import flixel.util.FlxColor;
-import extensions.flixel.FlxTextExt;
-
-using StringTools;
-using flixel.util.FlxSpriteUtil;
-
 class SongCaptions extends FlxSpriteGroup
 {
 

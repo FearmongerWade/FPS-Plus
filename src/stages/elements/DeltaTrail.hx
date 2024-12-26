@@ -1,9 +1,7 @@
 package stages.elements;
 
 import flixel.addons.effects.FlxTrail;
-import flixel.FlxSprite;
 import flixel.system.FlxAssets;
-import flixel.math.FlxPoint;
 
 /**
  * FlxTrail but it uses delta time.

@@ -1,10 +1,5 @@
 package stages.data;
 
-import flixel.sound.FlxSound;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.math.FlxPoint;
-import flixel.FlxObject;
 import stages.elements.*;
 
 class Spooky extends BaseStage
