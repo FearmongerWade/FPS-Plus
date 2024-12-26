@@ -18,7 +18,7 @@ class OptionsState extends FlxUIStateExt
     var grpOptions:FlxTypedGroup<OptionIcon>;
     var curSelected = 0;
 
-    var selector:FlxSprite;
+    var red:FlxSprite;
 
     override function create()
     {
@@ -40,9 +40,10 @@ class OptionsState extends FlxUIStateExt
         window.antialiasing = true;
         add(window);
 
-        selector = new FlxSprite().makeGraphic(390, 80, 0xff320b9e);
-        selector.alpha = 0;
-        add(selector);
+        red = new FlxSprite(442, 57).makeGraphic(27, 27, FlxColor.RED);
+        red.blend = MULTIPLY;
+        red.alpha = 0;
+        add(red);
 
         grpOptions = new FlxTypedGroup<OptionIcon>();
         add(grpOptions);
@@ -98,6 +99,19 @@ class OptionsState extends FlxUIStateExt
                     selectItem();
             }
         });
+        
+        if (mHover && !FlxG.mouse.overlaps(red))
+            red.alpha = 0;
+        if (FlxG.mouse.overlaps(red))
+        {
+            if (mClick)
+            {
+                mHover = true;
+                red.alpha = 1;
+            }
+            if (FlxG.mouse.justPressed && mClick)
+                backToMenu();
+        }
 
         if (FlxG.keys.justPressed.ESCAPE)
             backToMenu();
