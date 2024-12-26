@@ -1231,7 +1231,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (Binds.justPressed("pause") && startedCountdown && canPause){
+		if (Controls.justPressed('pause') && startedCountdown && canPause){
 			paused = true;
 			openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 		}
@@ -1328,7 +1328,7 @@ class PlayState extends MusicBeatState
 		//FlxG.watch.addQuick("totalBeats: ", totalBeats);
 
 		// RESET = Quick Game Over Screen
-		if (Binds.justPressed("killbind") && !startingSong) {
+		if (Controls.justPressed('die') && !startingSong) {
 			health = 0;
 		}
 

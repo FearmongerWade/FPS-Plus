@@ -248,33 +248,33 @@ class StoryMenuState extends MusicBeatState
 		{
 			if (!selectedWeek)
 			{
-				if (Binds.justPressed("menuUp"))
+				if (Controls.justPressed('ui_up'))
 					changeWeek(-1);
 
-				if (Binds.justPressed("menuDown"))
+				if (Controls.justPressed('ui_down'))
 					changeWeek(1);
 
-				if (Binds.pressed("menuRight"))
+				if (Controls.justPressed('ui_right'))
 					rightArrow.animation.play('press')
 				else
 					rightArrow.animation.play('idle');
 
-				if (Binds.pressed("menuLeft"))
+				if (Controls.justPressed('ui_left'))
 					leftArrow.animation.play('press');
 				else
 					leftArrow.animation.play('idle');
 
-				if (Binds.justPressed("menuRight"))
+				if (Controls.justPressed('ui_right'))
 					changeDifficulty(1);
-				if (Binds.justPressed("menuLeft"))
+				if (Controls.justPressed('ui_left'))
 					changeDifficulty(-1);
 			}
 
-			if (Binds.justPressed("menuAccept"))
+			if (Controls.justPressed('accept'))
 				selectWeek();
 		}
 
-		if (Binds.justPressed("menuBack") && !movedBack && !selectedWeek)
+		if (Controls.justPressed('back') && !movedBack && !selectedWeek)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;

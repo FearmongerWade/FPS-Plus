@@ -159,31 +159,29 @@ class FreeplayStateOld extends MusicBeatState
 
 		scoreText.text = "PERSONAL BEST:" + lerpScore;
 
-		if (Binds.justPressed("menuUp")){
+		if (Controls.justPressed('ui_up')){
 			changeSelection(-1);
 			changeDiff(0, false);
 		}
-		if (Binds.justPressed("menuDown")){
+		if (Controls.justPressed('ui_down')){
 			changeSelection(1);
 			changeDiff(0, false);
 		}
 
-		if (Binds.justPressed("menuLeft")){
+		if (Controls.justPressed('ui_left'))
 			changeDiff(-1);
-		}
 			
-		if (Binds.justPressed("menuRight")){
+		if (Controls.justPressed('ui_right'))
 			changeDiff(1);
-		}
 			
 
-		if (Binds.justPressed("menuBack") && !FlxUIStateExt.inTransition){
+		if (Controls.justPressed('back') && !FlxUIStateExt.inTransition){
 			if(Settings.data.cacheMusic){ FlxG.sound.music.stop(); }
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			switchState(new MainMenuState());
 		}
 
-		if (Binds.justPressed("menuAccept") && !FlxUIStateExt.inTransition)
+		if (Controls.justPressed('accept') && !FlxUIStateExt.inTransition)
 		{
 			var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 			PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());

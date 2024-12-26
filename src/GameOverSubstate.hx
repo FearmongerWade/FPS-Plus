@@ -1,15 +1,5 @@
 package;
 
-import openfl.events.KeyboardEvent;
-import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSubState;
-import flixel.math.FlxPoint;
-import flixel.util.FlxColor;
-import flixel.util.FlxTimer;
-import flixel.tweens.FlxEase;
-import flixel.tweens.FlxTween;
-
 class GameOverSubstate extends MusicBeatSubstate
 {
 	public var bf:Character;
@@ -57,11 +47,10 @@ class GameOverSubstate extends MusicBeatSubstate
 	override function update(elapsed:Float){
 		super.update(elapsed);
 
-		if (Binds.justPressed("menuAccept") && !isEnding){
+		if (Controls.justPressed('accept') && !isEnding)
 			endBullshit();
-		}
 
-		if (Binds.justPressed("menuBack") && !isEnding){
+		if (Controls.justPressed('back') && !isEnding){
 			FlxG.sound.music.stop();
 			isEnding = true;
 			FlxG.sound.play(Paths.sound('cancelMenu'));

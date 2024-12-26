@@ -95,16 +95,16 @@ class MainMenuState extends MusicBeatState
 	{
 		if (!selectedSomethin)
 		{
-			if (Binds.justPressed("menuUp"))
+			if (Controls.justPressed('ui_up'))
 				changeItem(-1);
 
-			if (Binds.justPressed("menuDown"))
+			if (Controls.justPressed('ui_down'))
 				changeItem(1);
 
-			if (Binds.justPressed("menuBack"))
+			if (Controls.justPressed('back'))
 				switchState(new TitleScreen());
 
-			if (Binds.justPressed("menuAccept"))
+			if (Controls.justPressed('accept'))
 				selectItem();
 		}
 

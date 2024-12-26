@@ -120,11 +120,11 @@ class OptionsState extends FlxUIStateExt
             case 'shaders':
                 Settings.data.shaders = !Settings.data.shaders;
                 grpOptions.members[2].animation.curAnim.curFrame = Settings.data.shaders ? 1 : 0;
-            /*case 'keybinds':
+            case 'keybinds':
                 grpOptions.members[3].animation.curAnim.curFrame = 1;
-                switchState(new config.KeyBindMenu());
+                openSubState(new options.KeybindsSubState());
                 trace('opening the keybinds submenu');
-            case 'offset':
+            /*case 'offset':
                 trace('opening the offset submenu');    
             case 'framerate':
                 trace('adjust your framerate');*/

@@ -1,18 +1,8 @@
 package;
 
-import flixel.tweens.FlxEase;
 import extensions.flixel.FlxTextExt;
 import haxe.Json;
-import flixel.text.FlxText;
-import flixel.FlxCamera;
 import debug.ChartingState;
-import flixel.tweens.FlxTween;
-import config.*;
-import flixel.FlxG;
-import flixel.FlxSprite;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.sound.FlxSound;
-import flixel.util.FlxColor;
 import options.OptionsState;
 
 class PauseSubState extends MusicBeatSubstate
@@ -110,22 +100,19 @@ class PauseSubState extends MusicBeatSubstate
 			
 		super.update(elapsed);
 
-		if (Binds.justPressed("menuUp")){
+		if (Controls.justPressed('ui_up'))
 			changeSelection(-1);
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.8);
-		}
-		if (Binds.justPressed("menuDown")){
-			changeSelection(1);
-			FlxG.sound.play(Paths.sound('scrollMenu'), 0.8);
-		}
 
-		if (Binds.justPressed("menuBack")){
+		if (Controls.justPressed('ui_down'))
+			changeSelection(1);
+
+		if (Controls.justPressed('back')){
 			PlayState.instance.tweenManager.active = true;
 			unpause();
 		}
 
-		if (!allowControllerPress ? Binds.justPressedKeyboardOnly("menuAccept") : Binds.justPressed("menuAccept")){
-
+		if (Controls.justPressed('accept'))
+		{
 			PlayState.instance.tweenManager.active = true;
 
 			var daSelected:String = menuItems[curSelected];
@@ -201,25 +188,23 @@ class PauseSubState extends MusicBeatSubstate
 		super.destroy();
 	}
 
-	function changeSelection(change:Int = 0):Void{
-		curSelected += change;
-
-		if (curSelected < 0)
-			curSelected = menuItems.length - 1;
-		if (curSelected >= menuItems.length)
-			curSelected = 0;
+	function changeSelection(change:Int = 0)
+	{
+		FlxG.sound.play(Paths.sound('scrollMenu'), 0.8);
+			
+		curSelected = FlxMath.wrap(curSelected + change, 0, menuItems.length - 1);
 
 		var bullShit:Int = 0;
 
-		for (item in grpMenuShit.members){
+		for (item in grpMenuShit.members)
+		{
 			item.targetY = bullShit - curSelected;
 			bullShit++;
 
 			item.alpha = 0.6;
 
-			if (item.targetY == 0){
+			if (item.targetY == 0)
 				item.alpha = 1;
-			}
 		}
 	}
 }

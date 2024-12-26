@@ -41,16 +41,8 @@ class TitleScreen extends MusicBeatState
 
 	final bgScrollSpeed = 20;
 
-	var allowControllerPress:Bool = false;
-
-	var inputIndex:Int = 0;
-	var inputSequence:Array<String> = ["menuUp", "menuUp", "menuDown", "menuDown", "menuLeft", "menuRight", "menuLeft", "menuRight"];
-	var inputTime:Float = 0;
-
 	override public function create():Void
 	{
-		//Polymod.init({modRoot: "mods", dirs: ['introMod']});
-
 		useDefaultTransIn = false;
 
 		camBackground = new FlxCamera();
@@ -127,13 +119,16 @@ class TitleScreen extends MusicBeatState
 		add(logoBl);
 		add(titleText);
 
-		if(FlxG.sound.music == null){
+		if(FlxG.sound.music == null)
 			FlxG.sound.playMusic(Paths.music(titleMusic), titleMusicVolume);
-		}
-		else{
-			if(!FlxG.sound.music.playing){
+		else
+		{
+			if(!FlxG.sound.music.playing)
+			{
 				FlxG.sound.playMusic(Paths.music(titleMusic), titleMusicVolume);
-				switch(titleMusic){
+
+				switch(titleMusic)
+				{
 					case "klaskiiLoop":
 						Conductor.changeBPM(158);
 					case "freakyMenu":
@@ -160,18 +155,14 @@ class TitleScreen extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		Conductor.songPosition = FlxG.sound.music.time;
-			// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
 		if (FlxG.keys.justPressed.F)
-		{
 			FlxG.fullscreen = !FlxG.fullscreen;
-		}
 
-		var pressedEnter:Bool = (!allowControllerPress ? Binds.justPressedKeyboardOnly("menuAccept") : Binds.justPressed("menuAccept"));
+		var pressedEnter:Bool = Controls.justPressed('accept');
 
-		if(!transitioning && Binds.justPressed("menuBack")){
+		if(!transitioning && Controls.justPressed('back'))
 			System.exit(0);
-		}
 
 		if (pressedEnter && !transitioning)
 		{
@@ -192,28 +183,6 @@ class TitleScreen extends MusicBeatState
 			});
 		}
 
-		//Titlescreen Easter Egg
-		if(inputTime > 0){
-			inputTime -= elapsed;
-		}
-		else{
-			inputIndex = 0;
-		}
-		if(Binds.justPressed(inputSequence[inputIndex]) && !transitioning){
-			trace(inputSequence[inputIndex]);
-			inputIndex++;
-			inputTime = 1;
-		}
-		if(inputIndex == inputSequence.length){
-			transitioning = true;
-			customTransOut = new InstantTransition();
-			switchState(new TitleEasterEgg());
-		}
-
-		if(!allowControllerPress && Binds.justReleasedControllerOnly("menuAccept")){
-			allowControllerPress = true;
-		}
-
 		super.update(elapsed);
 	}
 
@@ -222,19 +191,15 @@ class TitleScreen extends MusicBeatState
 		super.beatHit();
 
 		logoBl.animation.play('bump', true);
-		
-
-		//i want the option
-		if(curBeat % 1 == 0){
-
+	
+		if(curBeat % 1 == 0)
+		{
 			danceLeft = !danceLeft;
 
-			if (danceLeft){
+			if (danceLeft)
 				gfDance.animation.play('danceRight', true);
-			}
-			else{
+			else
 				gfDance.animation.play('danceLeft', true);
-			}
 		}
 	}
 

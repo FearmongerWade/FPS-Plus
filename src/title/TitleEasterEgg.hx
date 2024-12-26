@@ -75,7 +75,7 @@ class TitleEasterEgg extends MusicBeatState
         if(ballin){
             Conductor.songPosition = FlxG.sound.music.time;
 
-            if(Binds.justPressed("menuAccept")){
+            if(Controls.justPressed('accept')){
                 if((beatTime + Conductor.crochet*2) >= FlxG.sound.music.length){
                     FlxG.sound.music.onComplete = null;
                     exit();
@@ -87,7 +87,7 @@ class TitleEasterEgg extends MusicBeatState
                 }
             }
 
-            if(Binds.justPressed("menuBack")){
+            if(Controls.justPressed('back')){
                 FlxG.sound.music.onComplete = null;
                 exit();
             }
