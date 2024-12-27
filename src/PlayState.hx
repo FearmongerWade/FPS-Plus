@@ -4,7 +4,6 @@ import events.*;
 import objects.note.*;
 import flixel.math.FlxAngle;
 import haxe.Json;
-import results.ResultsState;
 
 import config.*;
 import debug.*;
@@ -38,7 +37,7 @@ class PlayState extends MusicBeatState
 	public static var EVENTS:SongEvents;
 	public static var loadEvents:Bool = true;
 	public static var isStoryMode:Bool = false;
-	public static var storyWeek:Int = 0;
+	//public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
 	public static var fromChartEditor:Bool = false;
@@ -175,19 +174,6 @@ class PlayState extends MusicBeatState
 	public var ccText:SongCaptions;
 
 	public var songStats:ScoreStats = {
-		score: 0,
-		highestCombo: 0,
-		accuracy: 0.0,
-		sickCount: 0,
-		goodCount: 0,
-		badCount: 0,
-		shitCount: 0,
-		susCount: 0,
-		missCount: 0,
-		comboBreakCount: 0,
-	};
-
-	public static var weekStats:ScoreStats = {
 		score: 0,
 		highestCombo: 0,
 		accuracy: 0.0,
@@ -1525,46 +1511,18 @@ class PlayState extends MusicBeatState
 
 			storyPlaylist.remove(storyPlaylist[0]);
 
-			if (!preventScoreSaving){
-				Highscore.saveScore(SONG.song, songStats.score, songStats.accuracy, storyDifficulty, Highscore.calculateRank(songStats));
-				weekStats.score += songStats.score;
-				if(songStats.highestCombo > weekStats.highestCombo) {weekStats.highestCombo = songStats.highestCombo;}
-				weekStats.accuracy += songStats.accuracy;
-				weekStats.sickCount += songStats.sickCount;
-				weekStats.goodCount += songStats.goodCount;
-				weekStats.badCount += songStats.badCount;
-				weekStats.shitCount += songStats.shitCount;
-				weekStats.susCount += songStats.susCount;
-				weekStats.missCount += songStats.missCount;
-				weekStats.comboBreakCount += songStats.comboBreakCount;
-			}
-
 			//CODE FOR ENDING A WEEK
 			if (storyPlaylist.length <= 0)
 			{
 				//FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), TitleScreen.titleMusicVolume);
 
 				StoryMenuState.fromPlayState = true;
-				//returnToMenu();
+				returnToMenu();
 				sectionStart = false;
 
-				// if ()
-				StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
-
-				weekStats.accuracy / StoryMenuState.weekData[storyWeek].length;
-
 				//Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
-				var songSaveStuff:SaveInfo = null;
-				if(!preventScoreSaving){
-					songSaveStuff = {
-						song: null,
-						week: storyWeek,
-						diff: storyDifficulty
-					}
-				}
-				switchState(new ResultsState(weekStats, StoryMenuState.weekNamesShort[storyWeek], "bf", songSaveStuff));
+				//switchState(new ResultsState(weekStats, StoryMenuState.weekList[storyWeek].displayName, "bf", songSaveStuff));
 
-				FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
 				FlxG.save.flush();
 			}
 			//CODE FOR CONTINUING A WEEK
@@ -1606,7 +1564,7 @@ class PlayState extends MusicBeatState
 					diff: storyDifficulty
 				}
 			}
-			switchState(new ResultsState(songStats, songName, "bf", songSaveStuff));
+			returnToMenu();
 		}
 	}
 
