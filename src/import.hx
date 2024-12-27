@@ -43,4 +43,6 @@ import extensions.flixel.*;
 import PlayState;
 import PlayState.ScoreStats;
 
+import title.TitleScreen;
+
 using StringTools;
