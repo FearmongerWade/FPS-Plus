@@ -67,7 +67,7 @@ class CacheReload extends FlxState
 
         var text = new FlxText(0, 0, 1280, "LOADING ASSETS...", 64);
 	    text.scrollFactor.set(0, 0);
-	    text.setFormat(Paths.font("vcr"), 64, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	    text.setFormat(Paths.font("vcr.ttf"), 64, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         text.borderSize = 3;
 	    text.borderQuality = 1;
         text.screenCenter(XY);

@@ -5,7 +5,6 @@ import flixel.text.FlxText;
 
 class FlxTextExt extends FlxText
 {
-
     public var outlineSteps:Int = 16;
     public var outlineExpandDistance:Float = 8;
 

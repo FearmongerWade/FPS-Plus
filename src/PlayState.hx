@@ -552,7 +552,7 @@ class PlayState extends MusicBeatState
 		// healthBar
 		
 		scoreTxt = new FlxTextExt(healthBarBG.x - 105, (FlxG.height * 0.9) + 36, 800, "", 22);
-		scoreTxt.setFormat(Paths.font("vcr"), 22, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 22, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 
 		iconP1 = new HealthIcon(boyfriend.iconName, true);
@@ -1514,7 +1514,7 @@ class PlayState extends MusicBeatState
 			//CODE FOR ENDING A WEEK
 			if (storyPlaylist.length <= 0)
 			{
-				//FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), TitleScreen.titleMusicVolume);
+				FlxG.sound.playMusic(Paths.music(TitleScreen.titleMusic), TitleScreen.titleMusicVolume);
 
 				StoryMenuState.fromPlayState = true;
 				returnToMenu();
@@ -1523,7 +1523,7 @@ class PlayState extends MusicBeatState
 				//Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 				//switchState(new ResultsState(weekStats, StoryMenuState.weekList[storyWeek].displayName, "bf", songSaveStuff));
 
-				FlxG.save.flush();
+				//FlxG.save.flush();
 			}
 			//CODE FOR CONTINUING A WEEK
 			else{
@@ -1546,30 +1546,22 @@ class PlayState extends MusicBeatState
 			}
 		}
 		//CODE FOR ENDING A FREEPLAY SONG
-		else{
-
+		else
+		{
 			sectionStart = false;
-			//returnToMenu();
 
 			var songName = SONG.song.replace("-", " ");
-			if(metadata != null){
+			if(metadata != null)
 				songName = metadata.name;
-			}
 
-			var songSaveStuff:SaveInfo = null;
-			if(!preventScoreSaving){
-				songSaveStuff = {
-					song: SONG.song,
-					week: null,
-					diff: storyDifficulty
-				}
-			}
 			returnToMenu();
 		}
 	}
 
-	public function returnToMenu():Void{
-		switch(returnLocation){
+	public function returnToMenu()
+	{
+		switch(returnLocation)
+		{
 			case "story":
 				switchState(new StoryMenuState());
 			case "freeplay":

@@ -99,7 +99,7 @@ class KeyBindMenu extends FlxUIStateExt
             var text:FlxTextExt = new FlxTextExt();
 
             var text = new FlxTextExt(controlBox.x + 10, controlBox.y + (100 * i) + 10, 1130, "", 80);
-            text.setFormat(Paths.font("Funkin-Bold", "otf"), text.textField.defaultTextFormat.size, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+            text.setFormat(Paths.font("Funkin-Bold.otf"), text.textField.defaultTextFormat.size, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
             text.borderSize = 5;
             text.borderQuality = 1;
             add(text);
@@ -108,7 +108,7 @@ class KeyBindMenu extends FlxUIStateExt
         }
 
         selectionTimerText = new FlxTextExt(controlBox.x + 10, controlBox.y + 10, 1130, "", 80);
-        selectionTimerText.setFormat(Paths.font("Funkin-Bold", "otf"), selectionTimerText.textField.defaultTextFormat.size, FlxColor.BLACK, FlxTextAlign.RIGHT);
+        selectionTimerText.setFormat(Paths.font("Funkin-Bold.otf"), selectionTimerText.textField.defaultTextFormat.size, FlxColor.BLACK, FlxTextAlign.RIGHT);
         selectionTimerText.visible = false;
         add(selectionTimerText);
 

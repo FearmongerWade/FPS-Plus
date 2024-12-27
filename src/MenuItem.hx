@@ -4,11 +4,11 @@ class MenuItem extends FlxSprite
 {
 	public var targetY:Float = 0;
 
-	public function new(x:Float, y:Float, weekNum:Int = 0)
+	public function new(x:Float, y:Float, weekNum:String)
 	{
 		super(x, y);
 
-		loadGraphic(Paths.image('menu/story/weeks/week' + weekNum));
+		loadGraphic(Paths.image('menu/story/weeks/' + weekNum));
 		antialiasing = true;
 	}
 

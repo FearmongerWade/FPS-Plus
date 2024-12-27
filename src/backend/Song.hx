@@ -24,7 +24,7 @@ typedef SongEvents =
 	var events:Array<Dynamic>;
 }
 
-typedef SongWeek = 
+typedef WeekData = 
 {
 	var songs:Array<String>;   				// Pretty self explanatory
 	var ?storyName:String;              	// Name of the file that's at the bottom of the story menu (week1, week2, etc)
@@ -38,12 +38,12 @@ typedef SongWeek =
 class Song
 {
 	public static var default_diffs:Array<String> = ['easy', 'normal', 'hard'];
-	public static var data:Array<SongWeek> = [
+	public static var data:Array<WeekData> = [
 		{
 			songs: ['Tutorial'],
 			storyName: 'tutorial',
 			displayName: 'Teaching Time',
-			menuChars: ['', 'bf', 'gf']
+			menuChars: ['dad', 'bf', 'gf']
 		},
 		{
 			songs: ['Bopeebo', 'Fresh', 'Dadbattle'],
@@ -73,7 +73,7 @@ class Song
 			songs: ['Cocoa', 'Eggnog', 'Winter-Horrorland'],
 			storyName: 'week5',
 			displayName: 'Merry crisis',
-			menuChars: ['parents', 'bf', 'gf']
+			menuChars: ['parents-xmas', 'bf', 'gf']
 		},
 		{
 			songs: ['Senpai', 'Roses', 'Thorns'],
@@ -85,11 +85,11 @@ class Song
 			songs: ['Ugh', 'Guns', 'Stress'],
 			storyName: 'week7',
 			displayName: 'Tankman',
-			menuChars: ['senpai', 'bf', 'gf']
+			menuChars: ['tankman', 'bf', 'gf']
 		}
 	];
 
-	public static function getData(huh:Int)
+	inline public static function getData(huh:Int)
 	{
 		var week = data[huh];
 

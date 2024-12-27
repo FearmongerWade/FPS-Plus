@@ -106,7 +106,7 @@ class KeyIcon extends FlxSpriteGroup
 		var keyBg = loadKeyGraphic("key" + (isKeypad ? "_kp" : "0"));
 
 		var text = new FlxText(0, 0, 80, text, 80);
-		text.setFormat(Paths.font("funkin", "otf"), 80, FlxColor.BLACK, FlxTextAlign.CENTER);
+		text.setFormat(Paths.font("funkin.otf"), 80, FlxColor.BLACK, FlxTextAlign.CENTER);
 		text.y = (keyBg.height / 2) - (text.height / 2) + yOffset;
 		text.text += "\n\n";
         add(text);

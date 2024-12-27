@@ -178,9 +178,8 @@ class MainMenuState extends MusicBeatState
 	{
 		switch (optionShit[curSelected])
 		{
-			//case 'storymode':
-			//	StoryMenuState.curWeek = 0;
-			//	switchState(new StoryMenuState());
+			case 'storymode':
+				switchState(new StoryMenuState());
 			case 'freeplay':
 				switchState(new old.FreeplayStateOld());
 			case 'options':

@@ -22,7 +22,7 @@ class MissingSubState extends MusicBeatSubstate
         red.alpha = 0;
         
         text = new FlxText(700, 300, hampter.width, 'this menu isnt done yet, sorry...', 24);
-        text.setFormat(Paths.font('funkin', 'otf'), 24, CENTER, FlxColor.WHITE);
+        text.setFormat(Paths.font('funkin.otf'), 24, CENTER, FlxColor.WHITE);
         text.scrollFactor.set();
         text.antialiasing = true;
         text.alpha = 0;

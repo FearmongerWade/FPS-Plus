@@ -112,6 +112,6 @@ class TextFieldExt extends TextField
         if (width != 0) this.width = width;
 
         selectable = false;
-        defaultTextFormat = new TextFormat(Paths.font("jetbrains"), size, color);
+        defaultTextFormat = new TextFormat(Paths.font("jetbrains.ttf"), size, color);
     }
 }

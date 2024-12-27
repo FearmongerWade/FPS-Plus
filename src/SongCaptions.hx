@@ -15,7 +15,7 @@ class SongCaptions extends FlxSpriteGroup
         super();
 
         text = new FlxTextExt(0, !_isDownScroll ? 540 : 140, 0, "", fontSize);
-        text.setFormat(Paths.font("vcr"), fontSize, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        text.setFormat(Paths.font("vcr.ttf"), fontSize, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 
         bg = new FlxSprite(0, 0).makeGraphic(1, 1, FlxColor.BLACK);
         bg.alpha = 0.67;

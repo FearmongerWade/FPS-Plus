@@ -43,7 +43,7 @@ class TitleEasterEgg extends MusicBeatState
         dj.scale.set(2, 2);
 
         var tempText = new FlxText(0, 0, 0, "LOOK AT HIM GO ");
-		tempText.setFormat(Paths.font("5by7"), 80, 0xFFFFFFFF);
+		tempText.setFormat(Paths.font("5by7.ttf"), 80, 0xFFFFFFFF);
 
 		topText = ScrollingText.createScrollingText(0, 50, tempText);
 		topText.velocity.x = -50;

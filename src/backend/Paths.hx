@@ -66,6 +66,6 @@ class Paths
     inline static public function video(key:String)
         return file(key, "videos", "mp4");
     
-    inline static public function font(key:String, ?extension:String = "ttf")
-        return file(key, "fonts", extension);
+    inline static public function font(key:String)
+        return 'assets/fonts/$key';
 }

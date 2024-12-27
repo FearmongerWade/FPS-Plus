@@ -120,7 +120,7 @@ class Startup extends FlxState
         }
 
         loadingText = new FlxText(5, FlxG.height - 30, 0, "", 24);
-        loadingText.setFormat(Paths.font("vcr"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        loadingText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         add(loadingText);
 
         #if web

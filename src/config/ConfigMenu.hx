@@ -205,7 +205,7 @@ class ConfigMenu extends FlxUIStateExt
 
         configText = new FlxTextExt(0, 0, 1280, "", 60);
 		configText.scrollFactor.set(0, 0);
-		configText.setFormat(Paths.font("Funkin-Bold", "otf"), configText.textField.defaultTextFormat.size, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		configText.setFormat(Paths.font("Funkin-Bold.otf"), configText.textField.defaultTextFormat.size, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		configText.borderSize = 4;
 		configText.borderQuality = 1;
         subMenuGroup.add(configText);

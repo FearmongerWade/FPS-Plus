@@ -89,8 +89,8 @@ class Highscore
 		return songScores.exists(formatSong(song, diff));
 	}
 
-	public static function getWeekScore(week:Int, diff:Int):SongStats{
-		return getScore("week" + week, diff);
+	public static function getWeekScore(week:String, diff:Int):SongStats{
+		return getScore(week, diff);
 	}
 
 	public static function load():Void{
